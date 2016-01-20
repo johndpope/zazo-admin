@@ -1,0 +1,40 @@
+defaults: &users_db_defaults
+  adapter: mysql2
+  encoding: utf8
+  collation: utf8_unicode_ci
+  host: <%= Figaro.env.users_db_host %>
+  database: <%= Figaro.env.users_db_name %>
+  username: <%= Figaro.env.users_db_username %>
+  password: <%= Figaro.env.users_db_password %>
+  port: '3306'
+  pool: 5
+
+defaults: &events_db_defaults
+  adapter: postgresql
+  encoding: utf8
+  host: <%= Figaro.env.events_db_host %>
+  database: <%= Figaro.env.events_db_name %>
+  username: <%= Figaro.env.events_db_username %>
+  password: <%= Figaro.env.events_db_password %>
+  port: '5432'
+  pool: 5
+
+
+development:
+  <<: *users_db_defaults
+
+test:
+  <<: *users_db_defaults
+
+production:
+  <<: *users_db_defaults
+
+
+events_db_development:
+  <<: *events_db_defaults
+
+events_db_test:
+  <<: *events_db_defaults
+
+events_db_production:
+  <<: *events_db_defaults
