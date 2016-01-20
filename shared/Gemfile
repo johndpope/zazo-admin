@@ -4,6 +4,8 @@ gem 'mysql2'
 
 gem 'figaro', github: 'asux/figaro', branch: 'feature/eb-set-command'
 
+gem 'phonelib'
+
 group :development, :test do
   gem 'pry-remote'
   gem 'pry-byebug', '= 1.3.3'

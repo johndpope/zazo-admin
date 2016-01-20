@@ -1,17 +1,17 @@
 module User::UserEventHelpers
   def referrer
-    Event.by_name(%w(user invited)).where(initiator_id: mkey).empty? ? 'marketing' : 'invite'
+    events_as_initiator.by_name(%w(user invited)).empty? ? 'marketing' : 'invite'
   end
 
-  def status_transitions_events
-    Event.status_transitions mkey
+  def status_transition_events
+    events_as_initiator.status_transitions
   end
 
-  def messages_sent_events
-    Event.messages_sent mkey
+  def zazo_sent_events
+    events_as_initiator.video_s3_uploaded
   end
 
-  def invites_events
-    Event.invites mkey
+  def invite_events
+    events_as_initiator.invites
   end
 end
