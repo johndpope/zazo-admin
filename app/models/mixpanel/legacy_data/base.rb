@@ -3,11 +3,7 @@ class Mixpanel::LegacyData::Base
 
   def initialize(user)
     @user = user
-  end
-
-  def prepare
     @data = prepared_data
-    self
   end
 
   protected
