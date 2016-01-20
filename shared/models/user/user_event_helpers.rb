@@ -8,7 +8,7 @@ module User::UserEventHelpers
   end
 
   def zazo_sent_events
-    events_as_initiator.video_s3_uploaded
+    event_as_sender.video_s3_uploaded
   end
 
   def invite_events
