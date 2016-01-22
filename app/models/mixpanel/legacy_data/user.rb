@@ -1,4 +1,6 @@
 class Mixpanel::LegacyData::User < Mixpanel::LegacyData::Base
+  private
+
   def prepared_data
     { '$id'              => user.id,
       '$mkey'            => user.mkey,
