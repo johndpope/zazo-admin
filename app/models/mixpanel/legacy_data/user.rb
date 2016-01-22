@@ -1,4 +1,11 @@
-class Mixpanel::LegacyData::User < Mixpanel::LegacyData::Base
+class Mixpanel::LegacyData::User
+  attr_reader :data, :user
+
+  def initialize(user:)
+    @user = user
+    @data = prepared_data
+  end
+
   private
 
   def prepared_data
