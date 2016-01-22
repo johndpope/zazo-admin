@@ -26,6 +26,7 @@ class Event < BaseConnection::EventsDb
   end
 
   # new
+  scope :by_initiator_id,      -> (initiator_id) { where initiator_id: initiator_id }
   scope :status_transitions,   -> { name_overlap %w(invited initialized registered verified) }
   scope :invites,              -> { by_name %w(user invitation_sent) }
 end
