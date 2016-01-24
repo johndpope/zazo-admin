@@ -1,4 +1,30 @@
 class Mixpanel::LegacyData::Events
+  EVENTS_DESCRIPTIONS = [
+    {
+      name: :status_transition_events,
+      default_scope: -> { Event.status_transitions },
+      user_scope_method: :by_initiator_id,
+      data: -> (e) {
+        { 'previous_status' => e.data['from_state'],
+          'current_status'  => e.data['to_state'] }
+      }
+    }, {
+      name: :zazo_sent,
+      default_scope: -> { Event.video_s3_uploaded },
+      user_scope_method: :with_sender,
+      data: -> (e) {
+        { 'target_mkey' => e.data['receiver_id'] }
+      }
+    }, {
+      name: :invite,
+      default_scope: -> { Event.invites },
+      user_scope_method: :by_initiator_id,
+      data: -> (e) {
+        { 'target_mkey' => e.target_id }
+      }
+    }
+  ]
+
   attr_reader :data, :user, :time_from, :time_to
 
   def initialize(user: nil, time_from: nil, time_to: nil)
@@ -10,43 +36,22 @@ class Mixpanel::LegacyData::Events
   private
 
   def prepared_data
-    { status_transition: status_transition_events,
-      zazo_sent:         zazo_sent_events,
-      invite:            invite_events }
-  end
-
-  def status_transition_events
-    wrap_restrictions(Event.status_transitions, :by_initiator_id).map do |e|
-      { original_event: e,
-        data: { 'previous_status' => e.data['from_state'],
-                'current_status'  => e.data['to_state'] }.merge(time e) }
+    EVENTS_DESCRIPTIONS.each_with_object({}) do |desc, memo|
+      memo[desc[:name]] = event_data_by_desc desc
     end
   end
 
-  def zazo_sent_events
-    wrap_restrictions(Event.video_s3_uploaded, :with_sender).map do |e|
+  def event_data_by_desc(desc)
+    wrap_restrictions(desc[:default_scope].call, desc[:user_scope_method]).map do |e|
       { original_event: e,
-        data: { 'target_mkey' => e.data['receiver_id'] }.merge(time e) }
+        data: desc[:data].call(e).merge('time' => e.triggered_at.to_i) }
     end
   end
 
-  def invite_events
-    wrap_restrictions(Event.invites, :by_initiator_id).map do |e|
-      { original_event: e,
-        data: { 'target_mkey' => e.target_id }.merge(time e) }
-    end
-  end
-
-  def wrap_restrictions(scope, mkey_scope_method)
+  def wrap_restrictions(scope, user_scope_method)
     scope = scope.since time_from if time_from
     scope = scope.till time_to if time_to
-    scope = scope.send mkey_scope_method, user.mkey if user
+    scope = scope.send user_scope_method, user.mkey if user
     scope
-  end
-
-  # common event attributes
-
-  def time(event)
-    { 'time' => event.triggered_at.to_i }
   end
 end
