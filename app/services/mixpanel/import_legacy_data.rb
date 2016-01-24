@@ -3,8 +3,8 @@ class Mixpanel::ImportLegacyData < Mixpanel::ImportBase
 
   def do
     users.map do |user|
-      import_user user.mkey, Mixpanel::LegacyData::User.new(user: user).data
-      events = Mixpanel::LegacyData::Events.new(user: user, time_from: time_from, time_to: time_to).data
+      import_user user.mkey, Mixpanel::Data::User.new(user: user).data
+      events = Mixpanel::Data::Events.new(user: user, time_from: time_from, time_to: time_to).data
       events.keys.each { |name| import_events user.mkey, name, events[name] }
     end
   end

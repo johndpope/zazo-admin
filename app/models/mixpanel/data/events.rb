@@ -1,4 +1,4 @@
-class Mixpanel::LegacyData::Events
+class Mixpanel::Data::Events
   EVENTS_DESCRIPTIONS = [
     {
       name: :status_transition_events,
@@ -10,7 +10,7 @@ class Mixpanel::LegacyData::Events
       }
     }, {
       name: :zazo_sent,
-      default_scope: -> { Event.video_s3_uploaded },
+      default_scope: -> { Event.video_s3_uploaded.distinct_target_id },
       user_scope_method: :with_sender,
       data: -> (e) {
         { 'target_mkey' => e.data['receiver_id'] }

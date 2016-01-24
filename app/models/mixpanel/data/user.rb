@@ -1,4 +1,4 @@
-class Mixpanel::LegacyData::User
+class Mixpanel::Data::User
   attr_reader :data, :user
 
   def initialize(user:)

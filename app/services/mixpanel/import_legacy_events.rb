@@ -1,6 +1,6 @@
 class Mixpanel::ImportLegacyEvents < Mixpanel::ImportBase
   def do
-    events = Mixpanel::LegacyData::Events.new(time_from: time_from, time_to: time_to).data
+    events = Mixpanel::Data::Events.new(time_from: time_from, time_to: time_to).data
     events.keys.each do |name|
       events[name].each do |event_row|
         e = event_row[:original_event]
