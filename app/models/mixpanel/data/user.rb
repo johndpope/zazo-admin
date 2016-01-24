@@ -18,6 +18,7 @@ class Mixpanel::Data::User
       '$client_platform' => user.client_platform,
       '$referrer'        => user.referrer,
       '$created_at'      => user.created_at,
+      '$last_status'     => user.status,
       '$connections'     => user.connections.count }
   end
 end
