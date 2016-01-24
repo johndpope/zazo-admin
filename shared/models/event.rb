@@ -29,4 +29,17 @@ class Event < BaseConnection::EventsDb
   scope :by_initiator_id,      -> (initiator_id) { where initiator_id: initiator_id }
   scope :status_transitions,   -> { name_overlap %w(invited initialized registered verified) }
   scope :invites,              -> { by_name %w(user invitation_sent) }
+
+  def self.distinct_target_id
+    unique_events = <<-SQL
+      SELECT *
+      FROM events INNER JOIN (
+        SELECT MIN(id) id
+        FROM events
+        WHERE name = '{video,s3,uploaded}'
+        GROUP BY target_id
+      ) unique_events ON unique_events.id = events.id
+    SQL
+    Event.select('*').from Arel.sql("(#{unique_events}) AS events")
+  end
 end
