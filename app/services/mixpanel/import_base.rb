@@ -25,7 +25,7 @@ class Mixpanel::ImportBase
   end
 
   def import_event(user_mkey, name, data)
-    p [:import_event, user_mkey, name]
+    p [:import_event, user_mkey, name, rand(1000)]
     tracker.import Figaro.env.mixpanel_api_key, user_mkey, name, data
   end
 end

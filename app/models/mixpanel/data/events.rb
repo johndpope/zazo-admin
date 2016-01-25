@@ -1,7 +1,7 @@
 class Mixpanel::Data::Events
   EVENTS_DESCRIPTIONS = [
     {
-      name: :status_transition_events,
+      name: :status_transition,
       default_scope: -> { Event.status_transitions },
       user_scope_method: :by_initiator_id,
       data: -> (e) {
