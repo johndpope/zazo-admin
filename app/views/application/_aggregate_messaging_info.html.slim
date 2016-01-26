@@ -1,0 +1,23 @@
+- if @aggregate_messaging_info  
+  h4 Aggregate Messaging Info
+  table.table 
+    caption Outgoing
+    tr
+      th Total sent
+      th Total received
+      th % undelivered
+    tr
+      td = @aggregate_messaging_info['outgoing']['total_sent']
+      td = @aggregate_messaging_info['outgoing']['total_received']
+      td = number_to_percentage(@aggregate_messaging_info['outgoing']['undelivered_percent'], precision: 2)
+    
+  table.table 
+    caption Incoming
+    tr
+      th Total sent
+      th Total received
+      th % undelivered
+    tr
+      td = @aggregate_messaging_info['incoming']['total_sent']
+      td = @aggregate_messaging_info['incoming']['total_received']
+      td = number_to_percentage(@aggregate_messaging_info['incoming']['undelivered_percent'], precision: 2)

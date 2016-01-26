@@ -23,11 +23,11 @@ table.table
         ' &nbsp;
         = conn.direction_arrow user.id
       td = conn.status connected_user
-      == render 'message_status_cells', data: @message_statuses[connected_user.event_id], user_id: user.event_id, outgoing_options: { receiver_id: connected_user.event_id }, incoming_options: { sender_id: connected_user.event_id }
+      == render 'message_status_cells', data: @message_statuses[connected_user.mkey], user_id: user.mkey, outgoing_options: { receiver_id: connected_user.mkey }, incoming_options: { sender_id: connected_user.mkey }
       td = link_to 'Show', conn
   tr.total
     td Total
     td
       - if @message_statuses
-        == render 'message_status_cells', data: @message_statuses['total'], user_id: user.event_id, outgoing_options: {}, incoming_options: {}
+        == render 'message_status_cells', data: @message_statuses['total'], user_id: user.mkey, outgoing_options: {}, incoming_options: {}
     td

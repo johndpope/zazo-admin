@@ -7,22 +7,20 @@ class UsersController < ApplicationController
     if term.present?
       user = term =~ /^\d+$/i ? User.find(term.to_i) : User.find_by_mkey(term)
       if user.present?
-        redirect_to(user)
+        redirect_to user
       else
-        flash[:alert] = t('messages.user_not_found', query: params[:user_id_or_mkey])
+        flash[:alert] = t 'messages.user_not_found', query: params[:user_id_or_mkey]
       end
     end
     @users = User.search(params[:query]).page(params[:page])
   end
 
   def show
-    @message_statuses = if @user.connected_users.count > 1
-      events_api.metric_data(:messages_statuses_between_users,
-                             user_id: @user.event_id,
-                             friend_ids: @user.connected_users.map(&:event_id))
-                        else
-                          {}
-                        end
+    @message_statuses = @user.connected_users.count > 1 ?
+      Metric::Data.get_data(:messages_statuses_between_users, {
+        user_id: @user.mkey,
+        friend_ids: @user.connected_users.pluck(:mkey)
+      }) : {}
   end
 
   def events
