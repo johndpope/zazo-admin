@@ -5,4 +5,4 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
-Dir.glob('shared/tasks/*.rake').each { |r| load r}
+Dir.glob('shared/tasks/*.rake').each { |r| load r }
