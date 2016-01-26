@@ -2,6 +2,7 @@ class User < BaseConnection::UsersDb
   include UserInfoHelpers
   include UserConnectionHelpers
   include UserEventHelpers
+  extend  UserScopeMethods
 
   has_many :connections_as_creator, class_name: 'Connection', foreign_key: :creator_id
   has_many :connections_as_target,  class_name: 'Connection', foreign_key: :target_id
