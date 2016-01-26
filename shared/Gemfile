@@ -12,13 +12,14 @@ gem 'phonelib'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-rspec'
+  gem 'guard'
+  gem 'guard-bundler', require: false
   gem 'guard-pow', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-zeus'
   gem 'terminal-notifier-guard'
-  gem 'bullet'
   gem 'rack-mini-profiler'
+  gem 'bullet'
 end
 
 group :development, :test do
@@ -26,11 +27,11 @@ group :development, :test do
   gem 'pry-remote'
   gem 'pry-byebug', '= 1.3.3'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
 end
 
 group :test do
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.0'
   gem 'simplecov', require: false
