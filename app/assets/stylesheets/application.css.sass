@@ -1,0 +1,76 @@
+//= require bootstrap-datetimepicker.min
+//= require_self
+
+@import framework_and_overrides
+
+@import vis.min
+@import visualization
+@import growth_calculator
+
+$label-active-bg: #a644c3 !default
+
+.status
+  @extend .label
+  &.initialized
+    @extend .label-default
+  &.uploaded
+    @extend .label-default
+  &.invited
+    @extend .label-info
+  &.received
+    @extend .label-info
+  &.registered
+    @extend .label-primary
+  &.downloaded
+    @extend .label-primary
+  &.verified
+    @extend .label-success
+  &.viewed
+    @extend .label-success
+  &.active
+    @include label-variant($label-active-bg)
+  &.failed_to_register
+    @extend .label-danger
+  &.established
+    @extend .label-primary
+  &.voided
+    @extend .label-danger
+
+input[type='submit']
+  @extend .btn
+  @extend .btn-primary
+
+#users-filter-form
+  label, input
+    margin-right: 1em
+  #query
+    width: 50em
+  .or
+    font-weight: bold
+    margin-left: 0
+    margin-right: 4px
+
+.true-value
+  @extend .glyphicon
+  @extend .glyphicon-ok
+
+.false-value
+  @extend .glyphicon
+  @extend .glyphicon-remove
+
+.statuses
+  list-style: none
+
+.total
+  font-weight: bold
+
+.version-info
+  color: #AFAFAF
+  font-size: 18px
+  margin-top: 12px
+
+.no-data
+  text-align: center
+
+h1.title
+  margin-bottom: 20px

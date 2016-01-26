@@ -1,0 +1,19 @@
+h2 Events for #{@user.name} in reverse chronological order
+
+section
+  .col-md-12
+    - if user.events.present?
+      table.table
+        tr
+          th Triggered at
+          th Name
+          th Triggered by
+          th Initiator
+          th Initiator ID
+          th Target
+          th Target ID
+          th Data
+          th Raw Params
+        == render collection: user.events, partial: 'event'
+    - else
+      .alert.alert-info role="alert" No message activity found

@@ -1,0 +1,61 @@
+defaults: &settings
+  version: 0.17.6
+  android_store_url: https://play.google.com/store/apps/details?id=com.zazoapp.client
+  iphone_store_url: https://itunes.apple.com/us/app/zazo/id922294638?mt=8
+  domain_name: zazoapp.com
+  site_name: zazoapp
+  app_name: Zazo Statistics
+  app_name_key: statistics
+  admin_email: admin@zazoapp.com
+  support_email: support@zazoapp.com
+  app_schema: zazo://
+  use_s3: false
+  allow_authentication_with_token: false
+  verification_code_length: 4
+  verification_code_lifetime_minutes: 120
+  verification_code_sms_countries:
+    - us
+    - ch
+    - cn
+    - de
+    - dk
+    - es
+    - fi
+    - fr
+    - gb
+    - hk
+    - il
+    - it
+    - jp
+    - nl
+    - nz
+    - se
+  default_per_page: 100
+  allowed_metrics:
+    - active_users
+    - messages_sent
+    - usage_by_active_users
+    - onboarding_info
+    - non_marketing_registered_by_weeks
+    - invitation_funnel
+    - non_marketing_invitations_sent
+    - invitation_conversion_data
+    - active_friends_grouped_data
+    - messages_failures
+    - messages_failures_autonotification
+
+development:
+  <<: *settings
+  allow_authentication_with_token: true
+
+test:
+  <<: *settings
+
+playground:
+  <<: *settings
+
+staging:
+  <<: *settings
+
+production:
+  <<: *settings

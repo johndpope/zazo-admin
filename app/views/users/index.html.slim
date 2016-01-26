@@ -1,0 +1,53 @@
+h1 Listing users
+
+section
+  .col-md-12
+    = form_tag users_path, method: :get, id: 'users-filter-form', class: 'form-inline' do
+      .form-group
+        = search_field_tag :query, params[:query], class: 'form-control', placeholder: 'enter part of first_name, last_name or mobile_number'
+        = submit_tag 'Search user'
+      .form-group
+        span.or or
+      .form-group
+        = text_field_tag :user_id_or_mkey, params[:user_id_or_mkey], class: 'form-control', placeholder: 'enter id or mkey'
+        = submit_tag 'Go to user'
+    br
+  .col-md-12
+    - if @users.present?
+      == render partial: 'listing_info', locals: { collection: @users }
+      table.table
+        thead
+          tr
+            th ID
+            th Name
+            th Mobile number
+            th Device platform
+            th Status
+            - if params[:query].present?
+              th Live connections
+              th Active connections
+            th Verification code
+            th Verification code sent at
+            th
+            th
+        tbody
+          - @users.each do |user|
+            tr class=([user.status, user.device_platform])
+              td = user.id
+              td = user.name
+              td = user.mobile_number
+              td = user.device_platform
+              td = status_tag user.status
+              - if params[:query].present?
+                td = user.live_connection_count
+                td = user.active_connections.count
+              td = user.verification_code
+              td = user.verification_date_time
+              td = link_to 'Show', user
+              td = link_to 'Visualize', visualization_user_path(user)
+      br
+    - else
+      - if params[:query].present?
+        p.text-info No users found
+    p = paginate @users
+    = link_to 'New User', new_user_path, class: 'btn btn-default'

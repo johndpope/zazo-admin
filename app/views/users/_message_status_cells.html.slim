@@ -1,0 +1,9 @@
+- if data.present?
+  td = link_to data['outgoing']['sent'], messages_path(outgoing_options.reverse_merge(sender_id: user_id, reverse: true, per: 1000))
+  td = link_to part_and_percentage(data['outgoing']['sent'], data['outgoing']['incomplete']), messages_path(outgoing_options.reverse_merge(sender_id: user_id, filter: :incomplete, reverse: true, per: 1000))
+  td = link_to part_and_percentage(data['outgoing']['sent'], data['outgoing']['unviewed']), messages_path(outgoing_options.reverse_merge(sender_id: user_id, filter: :unviewed, reverse: true, per: 1000))
+  td = link_to data['incoming']['sent'], messages_path(incoming_options.reverse_merge(receiver_id: user_id, reverse: true, per: 1000))
+  td = link_to part_and_percentage(data['incoming']['sent'], data['incoming']['incomplete']), messages_path(incoming_options.reverse_merge(receiver_id: user_id, filter: :incomplete, reverse: true, per: 1000))
+  td = link_to part_and_percentage(data['incoming']['sent'], data['incoming']['unviewed']), messages_path(incoming_options.reverse_merge(receiver_id: user_id, filter: :unviewed, reverse: true, per: 1000))
+- else
+  td.no-data colspan="6" no data

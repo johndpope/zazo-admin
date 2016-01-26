@@ -1,0 +1,33 @@
+h4
+  ' Connections
+  span.badge = user.connections_counts
+
+p = user.connections_counts_by_groups
+
+table.table
+  tr
+    th Friend
+    th Status
+    th To
+    th To Incomplete
+    th To Unviewed
+    th From
+    th From Incomplete
+    th From Unviewed
+    th Link
+  - user.grouped_connections.each do |conn|
+    - connected_user = conn.connected_user(user.id)
+    tr
+      td
+        = conn.friend_info user.id
+        ' &nbsp;
+        = conn.direction_arrow user.id
+      td = conn.status connected_user
+      == render 'message_status_cells', data: @message_statuses[connected_user.event_id], user_id: user.event_id, outgoing_options: { receiver_id: connected_user.event_id }, incoming_options: { sender_id: connected_user.event_id }
+      td = link_to 'Show', conn
+  tr.total
+    td Total
+    td
+      - if @message_statuses
+        == render 'message_status_cells', data: @message_statuses['total'], user_id: user.event_id, outgoing_options: {}, incoming_options: {}
+    td

@@ -1,0 +1,3 @@
+- content_for(:page_specific_scripts) { javascript_include_tag 'visualization', 'data-turbolinks-track' => true }
+
+= visualize_social_graph @user, @settings

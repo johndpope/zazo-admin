@@ -1,0 +1,46 @@
+.row
+  .col-sm-3
+    .row = simple_form_for :non_marketing_invitations_sent, url: options_metric_path(name) do |f|
+      .col-sm-5 = f.input :start_date, as: :date_picker, label: false, placeholder: 'Start date', input_html: { value: metric_options[:start_date] }
+      .col-sm-5 = f.input :end_date,   as: :date_picker, label: false, placeholder: 'End date',   input_html: { value: metric_options[:end_date] }
+      .col-sm-2 = f.submit 'Apply', class: 'btn btn-default'
+
+.row
+  .col-sm-12
+    table.table.table-bordered
+      thead
+        tr
+          th
+          th.text-center total / limited
+          th.text-center total / not limited
+          th.text-center ios / limited
+          th.text-center ios / not limited
+          th.text-center android / limited
+          th.text-center android / not limited
+      tbody
+        - metric.tap do |m|
+          tr
+            td.text
+              b RegisteredOrganicUsers
+            - m.for_each_platform do |key, platform|
+              td.text-center = m.registered key, platform
+          tr
+            td.text
+              b VerifiedOrganicUsers
+            - m.for_each_platform do |key, platform|
+              td.text-center = "#{m.verified key, platform} (#{m.percent_between({type: :verified, key: key, platform: platform}, {type: :registered, key: key, platform: platform})}%)"
+          tr
+            td.text
+              b UsersWhoInvitedOneOrMore
+            - m.for_each_platform do |key, platform|
+              td.text-center = "#{m.users_who_invites key, platform} (#{m.percent_between({type: :users_who_invites, key: key, platform: platform}, {type: :registered, key: key, platform: platform})}%)"
+          tr
+            td.text
+              b Invites
+            - m.for_each_platform do |key, platform|
+              td.text-center = m.invites key, platform
+          tr
+            td.text
+              b InvitesPerUserWhoInvitedOneOrMore
+            - m.for_each_platform do |key, platform|
+              td.text-center = m.invites_per_user_who_invites key, platform

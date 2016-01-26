@@ -1,0 +1,54 @@
+.growth_calculator
+
+  .col-sm-6
+    .col-sm-offset-6
+      h4.title Viral Growth Calculator
+
+    form.form-horizontal.x-growth_calculator
+      .form-group
+        label.col-sm-6.control-label NMVs sent an invite
+        .col-sm-6
+          .input-group
+            input.form-control.x-nmv_sent_invite_rate value='#{nmv_sent_invite_rate}'
+            .input-group-addon %
+
+      .form-group
+        label.col-sm-6.control-label Total invites per NMV
+        .col-sm-6
+          input.form-control.x-total_invites_per_nmv value='#{total_invites_per_nmv}'
+
+      .form-group
+        label.col-sm-6.control-label Invited becoming registered
+        .col-sm-6
+          .input-group
+            input.form-control.x-invited_to_registered_rate value='#{invited_to_registered_rate}'
+            .input-group-addon %
+
+      .form-group
+        label.col-sm-6.control-label NMR becoming verified
+        .col-sm-6
+          .input-group
+            input.form-control.x-nmr_to_nmv_rate value='#{nmr_to_nmv_rate}'
+            .input-group-addon %
+
+      .form-group
+        label.col-sm-6.control-label Total delay in days
+        .col-sm-6
+          input.form-control.x-delay_in_days value='#{delay_in_days}'
+
+      .form-group
+        label.col-sm-6.control-label Growth duration in days
+        .col-sm-6
+          input.form-control.x-growth_duration_in_days value='#{365}'
+
+      .form-group
+        .col-sm-offset-6.col-sm-6
+          .actions.pull-right
+            .btn.btn-default.reset.x-reset Reset
+            .btn.btn-default.x-submit Calculate
+
+  .col-sm-6
+    .growth-chart#x-growth_chart
+    .chart_subtitle
+      |viral index =&nbsp;
+      span.x-viral_index 0

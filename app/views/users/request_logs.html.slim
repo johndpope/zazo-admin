@@ -1,0 +1,12 @@
+h1 = @user.name
+
+h3 Request logs
+
+.row
+  .col-sm-2
+    = simple_form_for :request_logs_options, url: request_logs_user_path do |f|
+      = f.input :date_start, as: :date_picker, label: false, placeholder: 'Start date'
+      = f.input :date_end,   as: :date_picker, label: false, placeholder: 'End date'
+      = f.submit 'Request', class: 'btn btn-default'
+      ' &nbsp;
+      = link_to 'Back', user_path(@user), class: 'btn btn-default'

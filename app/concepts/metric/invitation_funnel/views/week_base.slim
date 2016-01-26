@@ -1,0 +1,11 @@
+.col-md-3
+  table.table.table-striped
+    thead
+      tr
+        th Week after becoming verified
+        th Invites per NMV > 0 invite
+    tbody
+      - data.each do |row|
+        tr
+          td = row['week_after_verified']
+          td = row['avg_invitations_count']

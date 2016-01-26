@@ -1,0 +1,15 @@
+.col-md-2
+  table.table.table-striped
+    thead
+      tr
+        th colspan='2' = title :metric
+    tbody
+      tr
+        td = title :total
+        td = total
+      tr
+        td = title :reduced
+        td = reduced
+      tr
+        td = title :delay
+        td = "#{delay} #{delay_meas}"

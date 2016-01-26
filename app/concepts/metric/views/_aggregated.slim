@@ -1,0 +1,13 @@
+.col-md-12
+  table.table
+    thead
+      tr
+        th Parameter
+        th Value
+        th Part of total, %
+    tbody
+      - data.each do |key, value|
+        tr class=("total" if key == total_attribute)
+          td = key.titleize
+          td = value
+          td = number_to_percentage(value * 100.0 / data[total_attribute], precision: 2)

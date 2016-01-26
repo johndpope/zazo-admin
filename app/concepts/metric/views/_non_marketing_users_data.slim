@@ -1,0 +1,83 @@
+.row
+  .col-sm-3
+    .row = simple_form_for :non_marketing_users_data, url: options_metric_path(name) do |f|
+      .col-sm-5 = f.input :start_date, as: :date_picker, label: false, placeholder: 'Start date', input_html: { value: metric_options[:start_date] }
+      .col-sm-5 = f.input :end_date,   as: :date_picker, label: false, placeholder: 'End date',   input_html: { value: metric_options[:end_date] }
+      .col-sm-2 = f.submit 'Apply', class: 'btn btn-default'
+
+.row
+  .col-sm-3
+    table.table.table-bordered
+      thead
+        tr
+          th colspan='1'
+          th.text-center colspan='1' android
+          th.text-center colspan='1' ios
+      tbody
+        - metric.tap do |m|
+          tr
+            td.text
+              b NMV>0-Invites / NMV
+            td.text-center = m.nmv_more_then_zero_invites_from_nmv :android
+            td.text-center = m.nmv_more_then_zero_invites_from_nmv :ios
+          tr
+            td
+              b Total-invites / NMV>0-Invites
+            td.text-center = m.total_invites_from_nmv_more_then_zero_invites :android
+            td.text-center = m.total_invites_from_nmv_more_then_zero_invites :ios
+          tr
+            td
+              b Click-store-link / Total-invites
+            td.text-center colspan='2' = m.click_store_link_from_total_invites
+          tr
+            td
+              b NMR / Total-invites
+            td.text-center colspan='2' = m.nmr_from_total_invites
+          tr
+            td
+              b NMV / NMR
+            td.text-center = m.nmv_from_nmr :android
+            td.text-center = m.nmv_from_nmr :ios
+
+  .col-sm-4
+    table.table.table-bordered
+      thead
+        tr
+          th colspan='1'
+          th.text-center total (all/limited)
+          th.text-center android (all/limited)
+          th.text-center ios (all/limited)
+      tbody
+        - metric.tap do |m|
+          tr
+            td.text
+              b Total-invites
+            td.text-center
+              = "#{m.total_invites[:all][:total]}/#{m.total_invites[:date_limited][:total]}"
+            td.text-center
+              = "#{m.total_invites[:all][:android]}/#{m.total_invites[:date_limited][:android]}"
+              = " (#{m.total_invites[:all][:android_after_verified_date]}/#{m.total_invites[:date_limited][:android_after_verified_date]} after #{m.class::VERIFIED_DATE_FROM})"
+            td.text-center
+              = "#{m.total_invites[:all][:ios]}/#{m.total_invites[:date_limited][:ios]}"
+          tr
+            td
+              b NMV
+            td.text-center = "#{m.nmv[:all][:total]}/#{m.nmv[:date_limited][:total]}"
+            td.text-center = "#{m.nmv[:all][:android]}/#{m.nmv[:date_limited][:android]}"
+            td.text-center = "#{m.nmv[:all][:ios]}/#{m.nmv[:date_limited][:ios]}"
+          tr
+            td
+              b NMR
+            td.text-center = "#{m.nmr[:all][:total]}/#{m.nmr[:date_limited][:total]}"
+            td.text-center = "#{m.nmr[:all][:android]}/#{m.nmr[:date_limited][:android]}"
+            td.text-center = "#{m.nmr[:all][:ios]}/#{m.nmr[:date_limited][:ios]}"
+          tr
+            td
+              b NMV>0-Invites
+            td.text-center = "#{m.nmv_more_then_zero_invites[:all][:total]}/#{m.nmv_more_then_zero_invites[:date_limited][:total]}"
+            td.text-center = "#{m.nmv_more_then_zero_invites[:all][:android]}/#{m.nmv_more_then_zero_invites[:date_limited][:android]}"
+            td.text-center = "#{m.nmv_more_then_zero_invites[:all][:ios]}/#{m.nmv_more_then_zero_invites[:date_limited][:ios]}"
+          tr
+            td
+              b Click-store-link
+            td.text-center = "#{m.app_link_clicks[:all]}/#{m.app_link_clicks[:date_limited]}"

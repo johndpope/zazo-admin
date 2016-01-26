@@ -1,0 +1,26 @@
+.row = simple_form_for :upload_duplications_data, url: options_metric_path(name) do |f|
+  .col-sm-5 = f.input :senders, label: false, placeholder: 'Filter by sender, e.g: 7qdanSEmctZ2jPnYA0a1,8TTXNCMhGT4kOt9b4O2M', input_html: { value: metric_options[:senders] }
+  .col-sm-2 = f.submit 'Apply', class: 'btn btn-default'
+
+table.table
+  thead
+    tr
+      th Sender
+      th File name
+      th Count
+      th First triggered at
+      th Last triggered at
+      th Client platform
+      th Client version
+      th = '*Client platform'
+  tbody
+    - metric.data.each do |row|
+      tr
+        td = row['sender_id']
+        td = link_to row['target_id'], message_path(row['target_id'])
+        td = row['count']
+        td = row['first_triggered_at']
+        td = row['last_triggered_at']
+        td = row['client_platform']
+        td = row['client_version']
+        td = metric.device_platform row['sender_id']

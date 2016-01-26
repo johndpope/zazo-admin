@@ -24,5 +24,7 @@ module ZazoAdmin
     config.active_record.raise_in_transactional_callbacks = true
 
     self.paths['config/database'] = 'shared/config/database.yml'
+
+    config.sass.preferred_syntax = :sass
   end
 end

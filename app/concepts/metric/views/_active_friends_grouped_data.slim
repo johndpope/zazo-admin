@@ -1,0 +1,16 @@
+.row
+  .col-sm-5
+    table.table.table-striped
+      thead
+        tr
+          th Active friends
+          th Owners
+          th Avg percent active days
+          th Avg messages per days
+      tbody
+        - data.each do |row|
+          tr
+            td = row['active_friends']
+            td = row['owners']
+            td = row['avg_percent_active_days']
+            td = row['avg_messages_per_days']
