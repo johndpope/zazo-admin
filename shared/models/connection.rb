@@ -1,6 +1,13 @@
 class Connection < BaseConnection::UsersDb
+  include AASM
+
   belongs_to :creator, class_name: 'User'
-  belongs_to :target,  class_name: 'User1'
+  belongs_to :target,  class_name: 'User'
+
+  aasm column: :status do
+    state :voided, initial: true
+    state :established
+  end
 
   scope :for_user_id, -> (user_id) { where ['creator_id = ? OR target_id = ?', user_id, user_id] }
   scope :between_creator_and_target, -> (creator_id, target_id) { where ['creator_id = ? AND target_id = ?', creator_id, target_id] }

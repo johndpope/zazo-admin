@@ -6,10 +6,12 @@ gem 'rollbar'
 gem 'settingslogic'
 gem 'figaro', github: 'asux/figaro', branch: 'feature/eb-set-command'
 
+gem 'aasm'
 gem 'phonelib'
 
 group :development do
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
