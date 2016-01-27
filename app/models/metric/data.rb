@@ -1,4 +1,8 @@
 class Metric::Data
+  class AttributeMissed < Exception; end
+  class AttributeNotAllowed < Exception; end
+  class IncorrectAttributeValue < Exception; end
+
   class DataHash < Hash
     include Hashie::Extensions::IndifferentAccess
   end

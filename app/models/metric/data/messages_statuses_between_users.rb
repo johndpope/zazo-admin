@@ -1,9 +1,7 @@
-class Metric::Data::MessagesStatusesBetweenUsers
-  attr_accessor :user_id, :friend_ids
-
-  def initialize(user_id:, friend_ids:)
-    @user_id    = user_id
-    @friend_ids = Array friend_ids
+class Metric::Data::MessagesStatusesBetweenUsers < Metric::Data::Base
+  def self.allowed_attributes
+    { user_id: {},
+      friend_ids: { transform: -> (a) { Array a } } }
   end
 
   def generate

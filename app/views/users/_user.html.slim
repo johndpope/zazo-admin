@@ -43,8 +43,6 @@ table.table
     td # Active connections
     td = user.active_connections.count
 
-= link_to 'Edit', edit_user_path(user), class: 'btn btn-default'
-' &nbsp;
 = link_to 'Events', events_user_path(user), class: 'btn btn-default'
 ' &nbsp;
 = link_to 'Visualize', visualization_user_path(user), class: 'btn btn-default'
