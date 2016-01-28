@@ -14,4 +14,8 @@ module User::UserInfoHelpers
   def client_platform
     push_user.device_platform rescue device_platform
   end
+
+  def info
+    "#{name}[#{id}]"
+  end
 end

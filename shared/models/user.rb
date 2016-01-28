@@ -1,4 +1,5 @@
 class User < BaseConnection::UsersDb
+  include AASM
   include UserInfoHelpers
   include UserConnectionHelpers
   include UserEventHelpers
@@ -17,5 +18,13 @@ class User < BaseConnection::UsersDb
 
   def event_as_receiver
     Event.with_receiver(mkey)
+  end
+
+  aasm column: :status do
+    state :initialized, initial: true
+    state :invited
+    state :registered
+    state :failed_to_register
+    state :verified
   end
 end

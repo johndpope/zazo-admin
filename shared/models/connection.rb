@@ -26,9 +26,12 @@ class Connection < BaseConnection::UsersDb
       Kvstore.where('key1 LIKE ?', "#{key_search(target, creator)}%").count > 0
   end
 
-
   def connected_user(user_id)
     creator_id == user_id ? target : creator
+  end
+
+  def event_id
+    ckey
   end
 
   private
@@ -37,3 +40,5 @@ class Connection < BaseConnection::UsersDb
     "#{sender.mkey}-#{receiver.mkey}"
   end
 end
+
+

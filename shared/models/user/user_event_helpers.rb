@@ -1,4 +1,8 @@
 module User::UserEventHelpers
+  def event_id
+    mkey
+  end
+
   def referrer
     events_as_initiator.by_name(%w(user invited)).empty? ? 'marketing' : 'invite'
   end

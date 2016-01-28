@@ -8,6 +8,7 @@ gem 'figaro', github: 'asux/figaro', branch: 'feature/eb-set-command'
 
 gem 'aasm'
 gem 'phonelib'
+gem 'global_phone'
 
 group :development do
   gem 'better_errors'
