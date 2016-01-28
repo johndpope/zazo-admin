@@ -1,17 +1,5 @@
 # Zazo Shared
 
-## Usage
-
-Dump existing databases' schemas:
-```
-rake db:multiple:schema:dump
-```
-
-Load databases' schemas:
-```
-rake db:multiple:schema:load
-```
-
 ## Setup
 
 Add this line to *Gemfile*:
@@ -21,12 +9,12 @@ eval_gemfile 'shared/Gemfile'
 
 Add this line to *Rakefile*:
 ```
-Dir.glob('shared/tasks/*.rake').each { |r| load r }
+Dir.glob('shared/lib/tasks/*.rake').each { |r| load r }
 ```
 
 Add this lines to *config/application.rb*:
 ```
-config.autoload_paths += %W(#{config.root}/shared/models)
+config.autoload_paths += %W(#{config.root}/shared/app/models)
 self.paths['config/database'] = 'shared/config/database.yml'
 ```
 
@@ -48,4 +36,16 @@ Create *spec/rails_helper.rb* file with content below:
 ENV['RAILS_ENV'] ||= 'test'
 
 require_relative '../shared/spec/spec_helper'
+```
+
+## Usage
+
+Dump existing databases' schemas:
+```
+rake db:multiple:schema:dump
+```
+
+Load databases' schemas:
+```
+rake db:multiple:schema:load
 ```

@@ -39,4 +39,5 @@ RSpec.configure do |config|
 end
 
 Dir[Rails.root.join('shared/spec/support/**/*.rb')].each { |f| require f }
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each        { |f| require f }
+Dir[Rails.root.join('shared/spec/models/**/*.rb')].each  { |f| require f }
