@@ -12,7 +12,6 @@ gem 'turbolinks'
 gem 'slim-rails'
 gem 'cells'
 gem 'cells-slim'
-gem 'groupdate'
 gem 'chartkick'
 
 gem 'bootstrap-sass'
@@ -22,6 +21,7 @@ gem 'simple_form'
 gem 'draper'
 gem 'kaminari'
 gem 'hashie'
+gem 'groupdate'
 
 gem 'momentjs-rails', '~> 2.9', github: 'derekprior/momentjs-rails'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true

@@ -43,7 +43,7 @@ class Metric::Cell < Cell::Concept
   end
 
   def metric_data(name, options = {})
-    @metric_data ||= EventsApi.new.metric_data(name, options)
+    @metric_data ||= Metric::Data.get_data name, options
   end
 
   def metric_options

@@ -35,9 +35,7 @@ class UserVisualizationDataQuery
   end
 
   def prepare_settings(settings)
-    {
-      depth: settings[:depth] ? settings[:depth].to_i : 1,
-      between: settings[:between] ? ActiveRecord::Type::Boolean.new.type_cast_from_user(settings[:between]) : true
-    }
+    { depth: settings[:depth] ? settings[:depth].to_i : 1,
+      between: settings[:between] ? ActiveRecord::Type::Boolean.new.type_cast_from_user(settings[:between]) : true }
   end
 end

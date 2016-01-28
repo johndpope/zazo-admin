@@ -4,8 +4,7 @@ class UserVisualizationDataQuery::MessagesCountBetweenUsersQuery
   end
 
   def execute
-    EventsApi.new.metric_data :messages_count_between_users,
-                              users_ids: @users
+    Metric::Data.get_data :messages_count_between_users, users_ids: @users
   end
 
   private

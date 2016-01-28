@@ -39,7 +39,7 @@ section
               td = user.device_platform
               td = status_tag user.status
               - if params[:query].present?
-                td = user.live_connection_count
+                td = user.live_connections.count
                 td = user.active_connections.count
               td = user.verification_code
               td = user.verification_date_time
@@ -50,4 +50,3 @@ section
       - if params[:query].present?
         p.text-info No users found
     p = paginate @users
-    = link_to 'New User', new_user_path, class: 'btn btn-default'

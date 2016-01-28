@@ -61,12 +61,10 @@ class UserVisualizationDataQuery::ConnectionsAndUsersInDepthQuery
 
   def get_users_ids(user_data, connections)
     users_ids = connections.each_with_object([]) do |conn, memo|
-      memo << { id: conn.target_id,  mkey: conn.target.event_id }  if user_data[:id] != conn.target_id
-      memo << { id: conn.creator_id, mkey: conn.creator.event_id } if user_data[:id] != conn.creator_id
+      memo << { id: conn.target_id,  mkey: conn.target.mkey }  if user_data[:id] != conn.target_id
+      memo << { id: conn.creator_id, mkey: conn.creator.mkey } if user_data[:id] != conn.creator_id
     end.uniq
-    {
-      target: { id: user_data[:id], mkey: user_data[:mkey] },
-      friends: users_ids
-    }
+    { target: { id: user_data[:id], mkey: user_data[:mkey] },
+      friends: users_ids }
   end
 end
