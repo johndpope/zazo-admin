@@ -22,6 +22,7 @@ gem 'draper'
 gem 'kaminari'
 gem 'hashie'
 gem 'groupdate'
+gem 'neatjson'
 
 gem 'momentjs-rails', '~> 2.9', github: 'derekprior/momentjs-rails'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true

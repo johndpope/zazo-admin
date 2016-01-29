@@ -24,8 +24,6 @@ class UsersController < ApplicationController
   end
 
   def events
-    @user.events = events_api.filter_by(@user.event_id, reverse: true)
-    @user.events.map! { |e| Event.new(e) }
   end
 
   def visualization

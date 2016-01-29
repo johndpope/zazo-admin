@@ -16,7 +16,7 @@ table.table
     th From Unviewed
     th Link
   - user.grouped_connections.each do |conn|
-    - connected_user = conn.connected_user(user.id)
+    - connected_user = conn.connected_user user.id
     tr
       td
         = conn.friend_info user.id
@@ -29,5 +29,5 @@ table.table
     td Total
     td
       - if @message_statuses
-        == render 'message_status_cells', data: @message_statuses['total'], user_id: user.mkey, outgoing_options: {}, incoming_options: {}
+        == render 'message_status_cells', data: @message_statuses[:total], user_id: user.mkey, outgoing_options: {}, incoming_options: {}
     td
