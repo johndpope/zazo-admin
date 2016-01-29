@@ -1,0 +1,29 @@
+h1
+  = @connection.creator.name
+  span<> ->
+  = @connection.target.name
+
+table.table
+  tr
+    td Creator
+    td = link_to "#{@connection.creator.name} [#{@connection.creator_id}]", user_path(@connection.creator)
+    td = @connection.creator.mobile_number
+  tr
+    td Target
+    td = link_to "#{@connection.target.name} [#{@connection.target_id}]", user_path(@connection.target)
+    td = @connection.target.mobile_number
+  tr
+    td Status
+    td = status_tag @connection.status
+  tr
+    td Active?
+    td
+      span class="#{@connection.active?}-value"
+      
+== render 'application/aggregate_messaging_info'
+
+= link_to 'Back', connections_path, class: 'btn btn-default'
+' &nbsp;
+= link_to('Messages: creator -> target', messages_path(sender_id: @connection.creator.event_id, receiver_id: @connection.target.event_id, reverse: true), class: 'btn btn-default')
+' &nbsp;
+= link_to('Messages: target -> creator', messages_path(sender_id: @connection.target.event_id, receiver_id: @connection.creator.event_id, reverse: true), class: 'btn btn-default')

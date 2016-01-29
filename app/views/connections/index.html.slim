@@ -1,0 +1,24 @@
+h1 Listing connections
+section
+  .col-md-12
+    == render partial: 'listing_info', locals: { collection: @connections }
+    table.table
+      thead
+        tr
+          th Creator ID
+          th Creator
+          th Target ID
+          th Target
+          th Status
+          th
+      tbody
+        - @connections.each do |connection|
+          tr
+            td = connection.creator.id
+            td = connection.creator.name
+            td = connection.target.id
+            td = connection.target.name
+            td = status_tag connection.status
+            td = link_to 'Show', connection
+    br
+    p = paginate @connections
