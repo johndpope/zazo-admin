@@ -18,4 +18,8 @@ module User::UserEventHelpers
   def invite_events
     events_as_initiator.invites
   end
+
+  def events(page = 1)
+    Event.page(page).filter_by(event_id).order triggered_at: :desc
+  end
 end
