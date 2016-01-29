@@ -7,9 +7,9 @@ class ConnectionsController < ApplicationController
   end
 
   def show
-    @aggregate_messaging_info = events_api.metric_data(:aggregate_messaging_info,
+    @aggregate_messaging_info = Metric::Data.get_data :aggregate_messaging_info,
                                                       user_id: @connection.creator.event_id,
-                                                      friend_id: @connection.target.event_id)
+                                                      friend_id: @connection.target.event_id
   end
 
   private
