@@ -1,0 +1,29 @@
+section
+  .col-md-12
+    h1 Messages
+    
+section
+  .col-md-12
+    table.table
+      caption
+        - if @sender
+          ' from #{link_to(@sender.info, @sender)}
+        - if @receiver
+          ' to #{link_to(@receiver.info, @receiver)}
+        ' last #{@messages.size} (#{params.fetch(:per, 100)}) items
+        - if params[:reverse]
+          ' in reverse order
+        - if @filter
+          ' with <strong>#{@filter}</strong> filter
+      thead
+        tr
+          th File name
+          th Uploaded at
+          th File size
+          th Status
+          th Delivered?
+          th Complete?
+          th Viewed?
+          th Missing events
+      tbody
+        == render @messages

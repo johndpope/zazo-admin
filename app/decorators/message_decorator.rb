@@ -25,15 +25,15 @@ class MessageDecorator < Draper::Decorator
   end
 
   def delivered_mark
-    h.content_tag :span, '', class: "#{object.delivered}-value"
+    h.content_tag :span, '', class: "#{object.delivered?}-value"
   end
 
   def complete_mark
-    h.content_tag :span, '', class: "#{object.complete}-value"
+    h.content_tag :span, '', class: "#{object.complete?}-value"
   end
 
   def viewed_mark
-    h.content_tag :span, '', class: "#{object.viewed}-value"
+    h.content_tag :span, '', class: "#{object.viewed?}-value"
   end
 
   def missing_events

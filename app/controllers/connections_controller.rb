@@ -1,5 +1,5 @@
 class ConnectionsController < ApplicationController
-  before_action :set_connection, only: [:show, :edit, :update, :destroy, :messages]
+  before_action :set_connection, only: :show
   decorates_assigned :creator_to_target_messages, :target_to_creator_messages
 
   def index

@@ -1,0 +1,59 @@
+section
+  .col-md-12
+    h1 Message
+  
+section
+  .col-md-12
+    table.table
+      tr
+        td File name
+        td = @message.file_name  
+      tr
+        td Sender
+        td = @message.sender
+      tr
+        td Receiver
+        td = @message.receiver
+      tr
+        td Uploaded at
+        td = @message.uploaded_at
+      tr
+        td File size
+        td = @message.file_size
+      tr
+        td Status
+        td = @message.status
+      tr
+        td Delivered?
+        td = @message.delivered_mark
+      tr
+        td Complete?
+        td = @message.complete_mark  
+      tr
+        td Viewed?
+        td = @message.viewed_mark
+      tr
+        td Missing events
+        td = @message.missing_events
+        
+section
+  .col-md-12
+    h2 Events
+    
+section
+  .col-md-12
+    - if @message.events.present?
+      table.table
+        tr
+          th Triggered at
+          th Name
+          th Triggered by
+          th Initiator
+          th Initiator ID
+          th Target
+          th Target ID
+          th Data
+          th Raw Params
+        == render collection: @message.events, partial: 'event'
+    - else
+      .alert.alert-info role="alert" No user activity found
