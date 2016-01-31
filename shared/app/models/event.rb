@@ -27,6 +27,18 @@ class Event < BaseConnection::EventsDb
           term: term, term_pattern: term_pattern
   end
 
+  def video_filename
+    data['video_filename']
+  end
+
+  def sender_id
+    data['sender_id']
+  end
+
+  def receiver_id
+    data['receiver_id']
+  end
+
   # new
   scope :by_initiator_id,      -> (initiator_id) { where initiator_id: initiator_id }
   scope :status_transitions,   -> { name_overlap %w(invited initialized registered verified) }
