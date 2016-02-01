@@ -1,4 +1,4 @@
-class MetricsController < AdminController
+class MetricsController < ApplicationController
   before_action :validate_group_by, only: [:show]
 
   def index
@@ -20,6 +20,10 @@ class MetricsController < AdminController
   def options
     session[Metric::Options::SESSION_KEY] = Metric::Options.new(params[:id]).get_by_params(params)
     redirect_to request.referer
+  end
+
+  def data
+    render json: Metric::Data.get_data(params[:id])
   end
 
   private

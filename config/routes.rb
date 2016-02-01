@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   resources :connections
 
   resources :metrics, only: [:index, :show] do
-    post :options, on: :member
+    member do
+      get :data
+      post :options
+    end
     get :view, on: :collection
   end
 
