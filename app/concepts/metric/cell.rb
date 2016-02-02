@@ -7,47 +7,31 @@ class Metric::Cell < Cell::Concept
   include ActionView::Helpers::NumberHelper
   include Chartkick::Helper
 
-  SPECIFIC_LAYOUTS = {
-    upload_duplications_data: false
-  }
+  def self.layout
+    :layout
+  end
 
-  property :type, :name
+  property :name, :type
 
   def show
-    render layout: layout, view: '_' + type
+    render layout: self.class.layout, view: "_#{type}"
   rescue Cell::TemplateMissingError
-    render layout: layout, view: :show
+    render layout: self.class.layout, view: :show
   end
 
   private
-
-  def layout
-    specific_layout = SPECIFIC_LAYOUTS[type.to_sym]
-    specific_layout.nil? ? :layout : specific_layout
-  end
-
-  def title
-    name.titleize
-  end
 
   def chart(options = {})
     send type, options
   end
 
-  def metric
-    send type
+  def data(options = {})
+    data = model.data options
+    data.kind_of?(Hash) && data.key?(:data) ? data[:data] : data
   end
 
-  def chart_id
-    "chart-#{SecureRandom.hex}"
-  end
-
-  def metric_data(name, options = {})
-    @metric_data ||= Metric::Data.get_data name, options
-  end
-
-  def metric_options
-    options[:options][type.to_sym] || {} rescue {}
+  def options
+    @options[:options][type] || {} rescue {}
   end
 
   #
@@ -65,7 +49,7 @@ class Metric::Cell < Cell::Concept
   end
 
   def invitation_funnel(subject)
-    @data ||= metric_data :invitation_funnel, metric_options
+    @data ||= metric_data metric_options
     return @data if subject == :raw
     @mapped ||= @data.keys.map do |key|
       klass = "Metric::InvitationFunnel::#{key.classify}".safe_constantize
@@ -74,20 +58,20 @@ class Metric::Cell < Cell::Concept
   end
 
   def non_marketing_users_data
-    @metric ||= Metric::NonMarketingUsersData.new metric_data(name, metric_options), metric_options
+    @metric ||= Metric::NonMarketingUsersData.new data(options), options
   end
 
   def invitation_conversion_data
-    @metric ||= Metric::InvitationConversionData.new metric_data(name, metric_options), metric_options
+    @metric ||= Metric::InvitationConversionData.new data(options), options
   end
 
   def non_marketing_invitations_sent
-    @metric ||= Metric::NonMarketingInvitationsSent.new metric_data(name, metric_options), metric_options
+    @metric ||= Metric::NonMarketingInvitationsSent.new data(options), options
   end
 
   def upload_duplications_data
-    senders = metric_options[:senders] && metric_options[:senders].delete(' ').split(',')
-    @metric ||= Metric::UploadDuplicationsData.new metric_data(name, senders: senders), metric_options
+    senders = options[:senders] && options[:senders].delete(' ').split(',')
+    @metric ||= Metric::UploadDuplicationsData.new data(senders: senders), options
   end
 
   def upload_duplications(*)
@@ -101,17 +85,14 @@ class Metric::Cell < Cell::Concept
   end
 
   #
-  # specific helpers
+  # helpers
   #
 
-  def data
-    return @data if @data
-    @data = metric_data(name)
-    @data = @data['data'] if @data.kind_of?(Hash) && @data.key?('data')
-    @data
+  def title
+    name.to_s.titleize
   end
 
-  def total_attribute
-    @metric_data['meta']['total']
+  def chart_id
+    "chart-#{SecureRandom.hex}"
   end
 end

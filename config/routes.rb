@@ -17,7 +17,6 @@ Rails.application.routes.draw do
       get :data
       post :options
     end
-    get :view, on: :collection
   end
 
   resources :messages, only: [:index, :show] do

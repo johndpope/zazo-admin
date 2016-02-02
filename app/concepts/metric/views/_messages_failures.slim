@@ -1,16 +1,16 @@
 - sections = data.keys
-- attributes = data['ios_to_ios'].keys
+- attributes = data[:ios_to_ios].keys
 .col-md-12
   table.table
     thead
       tr
         th Parameter
         - sections.each do |section|
-          th = section.gsub('_to_', '&rarr;')
+          th = section.to_s.gsub('_to_', '&rarr;')
     tbody
       - attributes.each do |attr|
-        tr class=("total" if attr == total_attribute)
-          td = attr.titleize
+        tr class=('total' if attr == total_attribute)
+          td = attr.to_s.titleize
           - data.each do |section, numbers|
             - value = numbers[attr]
             td #{value} (#{number_to_percentage(value * 100.0 / numbers[total_attribute], precision: 2)})

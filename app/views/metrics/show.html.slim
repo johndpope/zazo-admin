@@ -1,0 +1,7 @@
+- content_for(:page_specific_scripts) { javascript_include_tag 'metrics' }
+
+h1.title Metric view
+
+- metric = Metric.find_by(:name, :messages_failures)
+
+== concept "metric/cell/#{metric.type}", metric, options: Metric::Options.get_by_session(session)

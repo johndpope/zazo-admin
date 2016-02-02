@@ -28,7 +28,7 @@ section
               th Active connections
             th Verification code
             th Verification code sent at
-            th colspan='4'
+            th
         tbody
           - @users.each do |user|
             tr class=([user.status, user.device_platform])
@@ -42,10 +42,14 @@ section
                 td = user.active_connections.count
               td = user.verification_code
               td = user.verification_date_time
-              td = link_to 'Show', user
-              td = link_to 'Events', events_user_path(user)
-              td = link_to 'Visualize', visualization_user_path(user)
-              td = link_to 'Request logs', request_logs_user_path(user)
+              td
+                = link_to 'Show', user
+                = actions_separator
+                = link_to 'Events', events_user_path(user)
+                = actions_separator
+                = link_to 'Visualize', visualization_user_path(user)
+                = actions_separator
+                = link_to 'Request logs', request_logs_user_path(user)
       br
     - else
       - if params[:query].present?

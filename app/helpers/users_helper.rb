@@ -14,4 +14,8 @@ module UsersHelper
     }
     content_tag :div, '', id: 'visualization', data: data
   end
+
+  def actions_separator
+    ' | '
+  end
 end

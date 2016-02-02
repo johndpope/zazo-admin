@@ -1,0 +1,16 @@
+.panel.panel-default
+  .panel-heading
+    h3.panel-title = metric.to_s.titleize
+  .panel-body
+    div role="tabpanel"
+      ul.nav.nav-pills
+        li.active role="presentation"
+          a href="##{metric}_by_day" aria-controls="#{metric}_by_day" role="tab" data-toggle="pill" by day
+        li role="presentation"
+          a href="##{metric}_by_week" aria-controls="#{metric}_by_week" role="tab" data-toggle="pill" by week
+        li role="presentation"
+          a href="##{metric}_by_month" aria-controls="#{metric}_by_month" role="tab" data-toggle="pill" by month  
+      .tab-content
+        .tab-pane.active id="#{metric}_by_day" role="tabpanel" = events_metric_chart chart, metric, :day
+        .tab-pane id="#{metric}_by_week" role="tabpanel" = events_metric_chart chart, metric, :week
+        .tab-pane id="#{metric}_by_month" role="tabpanel" = events_metric_chart chart, metric, :month
