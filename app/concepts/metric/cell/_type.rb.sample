@@ -1,0 +1,3 @@
+class Metric::Cell::MetricType < Metric::Cell
+
+end

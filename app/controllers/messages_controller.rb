@@ -12,10 +12,6 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:id]).decorate
   end
 
-  def duplications
-    @metric = Metric.new name: 'upload_duplications_data', type: 'upload_duplications_data'
-  end
-
   private
 
   def messages_params

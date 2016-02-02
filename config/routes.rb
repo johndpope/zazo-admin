@@ -19,9 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :messages, only: [:index, :show] do
-    get :duplications, on: :collection
-  end
+  resources :messages, only: [:index, :show]
 
   get 'kvstore_admin' => 'kvstore_admin#index'
   get 'kvstore_admin/delete_all' => 'kvstore_admin#delete_all'

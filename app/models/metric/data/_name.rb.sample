@@ -1,0 +1,5 @@
+class Metric::Data::MetricName < Metric::Data::Base
+  def self.allowed_attributes
+    { attr: { default: nil } }
+  end
+end

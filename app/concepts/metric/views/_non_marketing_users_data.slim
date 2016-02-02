@@ -1,8 +1,8 @@
 .row
   .col-sm-3
     .row = simple_form_for :non_marketing_users_data, url: options_metric_path(name) do |f|
-      .col-sm-5 = f.input :start_date, as: :date_picker, label: false, placeholder: 'Start date', input_html: { value: metric_options[:start_date] }
-      .col-sm-5 = f.input :end_date,   as: :date_picker, label: false, placeholder: 'End date',   input_html: { value: metric_options[:end_date] }
+      .col-sm-5 = f.input :start_date, as: :date_picker, label: false, placeholder: 'Start date', input_html: { value: options[:start_date] }
+      .col-sm-5 = f.input :end_date,   as: :date_picker, label: false, placeholder: 'End date',   input_html: { value: options[:end_date] }
       .col-sm-2 = f.submit 'Apply', class: 'btn btn-default'
 
 .row

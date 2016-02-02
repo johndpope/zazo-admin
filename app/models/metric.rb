@@ -2,6 +2,7 @@ require 'metric/data'
 
 class Metric
   METRICS_PARAMS = [
+    { name: :upload_duplications_data },
     { name: :onboarding_info },
     { name: :invitation_conversion },
     { name: :messages_failures },
@@ -12,7 +13,8 @@ class Metric
     :onboarding_info,
     :invitation_conversion,
     :messages_failures,
-    :messages_failures_autonotification
+    :messages_failures_autonotification,
+    :upload_duplications_data
   ]
 
   class << self
@@ -29,6 +31,10 @@ class Metric
     def find_by(attribute, value)
       metric_params = METRICS_PARAMS.find { |params| params[attribute] == value.to_sym }
       build_from_params(metric_params).first if metric_params
+    end
+
+    def find_by_name(name)
+      find_by :name, name
     end
 
     private

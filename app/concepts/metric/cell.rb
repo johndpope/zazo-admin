@@ -49,7 +49,7 @@ class Metric::Cell < Cell::Concept
   end
 
   def invitation_funnel(subject)
-    @data ||= metric_data metric_options
+    @data ||= data options
     return @data if subject == :raw
     @mapped ||= @data.keys.map do |key|
       klass = "Metric::InvitationFunnel::#{key.classify}".safe_constantize
