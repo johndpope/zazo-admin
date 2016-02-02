@@ -1,4 +1,8 @@
 class Metric::Options
+  class OptionsWrapper < Hash
+    include Hashie::Extensions::IndifferentAccess
+  end
+
   SESSION_KEY = :metrics_settings
   ATTRIBUTES  = {
     invitation_funnel: [
@@ -9,7 +13,7 @@ class Metric::Options
       { name: :start_date, validate: :date_valid?, default: '' },
       { name: :end_date,   validate: :date_valid?, default: '' }
     ],
-    invitation_conversion_data: [
+    invitation_conversion: [
       { name: :start_date, validate: :date_valid?, default: '' },
       { name: :end_date,   validate: :date_valid?, default: '' }
     ],
@@ -21,7 +25,7 @@ class Metric::Options
   attr_reader :metric
 
   def self.get_by_session(session)
-    session[SESSION_KEY]
+    OptionsWrapper[session[SESSION_KEY]]
   end
 
   def initialize(metric)

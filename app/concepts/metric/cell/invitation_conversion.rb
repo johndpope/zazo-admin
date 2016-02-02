@@ -1,18 +1,7 @@
-class Metric::InvitationConversionData
-  attr_reader :data, :options, :start_date, :end_date
+class Metric::Cell::InvitationConversion < Metric::Cell
+  after_initialize :calculation
 
-  def initialize(data, opts)
-    @data    = data
-    @options = opts
-
-    @start_date = !options[:start_date] || options[:start_date].empty? ? 10.years.ago.to_time : Time.parse(options[:start_date])
-    @end_date   = !options[:end_date] || options[:end_date].empty? ? 10.years.from_now.to_time : Time.parse(options[:end_date])
-
-    [:invited, :registered, :store_clicks, :store_clicks_unique].each do |var|
-      self.instance_variable_set :"@#{var}", initial_stats
-    end
-    calculate_results
-  end
+  attr_reader :start_date, :end_date
 
   def for_each_key
     [:limited, :not_limited].each { |key| yield key }
@@ -39,14 +28,28 @@ class Metric::InvitationConversionData
     @store_clicks_unique[key]
   end
 
-  private
+  #
+  # calculation
+  #
 
-  def initial_stats
-    { not_limited: 0,
-      limited:     0 }
+  def calculation
+    set_options
+    set_variables
+    calculate_data
   end
 
-  def calculate_results
+  def set_options
+    @start_date = !options[:start_date] || options[:start_date].empty? ? 10.years.ago.to_time : Time.parse(options[:start_date])
+    @end_date   = !options[:end_date] || options[:end_date].empty? ? 10.years.from_now.to_time : Time.parse(options[:end_date])
+  end
+
+  def set_variables
+    [:invited, :registered, :store_clicks, :store_clicks_unique].each do |var|
+      self.instance_variable_set :"@#{var}", { not_limited: 0, limited: 0 }
+    end
+  end
+
+  def calculate_data
     data.each do |row|
       calculate_users_by_state row, :invited
       calculate_users_by_state row, :registered
@@ -63,8 +66,8 @@ class Metric::InvitationConversionData
 
       if state == :registered
         invited_at = Time.parse row['invited_at']
-        instance[:limited] += 1 if state_at   > start_date && state_at   < end_date &&
-                                   invited_at > start_date && invited_at < end_date
+        instance[:limited] += 1 if state_at > start_date && state_at < end_date &&
+          invited_at > start_date && invited_at < end_date
       else
         instance[:limited] += 1 if state_at > start_date && state_at < end_date
       end

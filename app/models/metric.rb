@@ -3,12 +3,14 @@ require 'metric/data'
 class Metric
   METRICS_PARAMS = [
     { name: :onboarding_info },
+    { name: :invitation_conversion },
     { name: :messages_failures },
     { name: :messages_failures_autonotification, type: :messages_failures }
   ]
 
   METRICS_TO_RENDER = [
     :onboarding_info,
+    :invitation_conversion,
     :messages_failures,
     :messages_failures_autonotification
   ]

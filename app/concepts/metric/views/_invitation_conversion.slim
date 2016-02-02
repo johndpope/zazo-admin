@@ -1,0 +1,37 @@
+.row
+  .col-sm-3
+    .row = simple_form_for :invitation_conversion, url: options_metric_path(name) do |f|
+      .col-sm-5 = f.input :start_date, as: :date_picker, label: false, placeholder: 'Start date', input_html: { value: options[:start_date] }
+      .col-sm-5 = f.input :end_date, as: :date_picker, label: false, placeholder: 'End date', input_html: { value: options[:end_date] }
+      .col-sm-2 = f.submit 'Apply', class: 'btn btn-default'
+
+.row
+  .col-sm-5
+    table.table.table-bordered
+      thead
+        tr
+          th
+          th.text-center limited
+          th.text-center not limited
+      tbody
+        tr
+          td.text
+            b InvitedUsers
+          - for_each_key do |key|
+            td.text-center = invited key
+        tr
+          td.text
+            b StoreClicks
+          - for_each_key do |key|
+            td.text-center = "#{store_clicks key} (#{percent_from_invited :store_clicks, key}%)"
+        tr
+          td.text
+            b StoreClicksUnique
+          - for_each_key do |key|
+            td.text-center = "#{store_clicks_unique key} (#{percent_from_invited :store_clicks_unique, key}%)"
+        tr
+          td.text
+            b Registrations
+          - for_each_key do |key|
+            td.text-center = "#{registered key} (#{percent_from_invited :registered, key}%)"
+

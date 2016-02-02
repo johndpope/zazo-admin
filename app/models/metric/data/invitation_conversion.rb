@@ -1,11 +1,11 @@
 class Metric::Data::InvitationConversion < Metric::Data::Base
   def self.allowed_attributes
-    { start_date: { default: 10.years.ago.to_time, transform: -> (a) { Time.parse a } },
-      end_date:   { default: 10.years.from_now.to_time, transform: -> (a) { Time.parse a } } }
+    { start_date: { default: 10.years.ago.to_time },
+      end_date:   { default: 10.years.from_now.to_time } }
   end
 
   def generate
-    run_raw_query(query)
+    run_raw_query_on_events(query)
   end
 
   protected

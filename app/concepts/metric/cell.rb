@@ -1,4 +1,6 @@
 class Metric::Cell < Cell::Concept
+  extend ActiveModel::Callbacks
+
   include ActionView::RecordIdentifier
   include ActionView::Helpers::FormHelper
   include ActionView::Helpers::FormOptionsHelper
@@ -7,11 +9,18 @@ class Metric::Cell < Cell::Concept
   include ActionView::Helpers::NumberHelper
   include Chartkick::Helper
 
+  define_model_callbacks :initialize
+
   def self.layout
     :layout
   end
 
   property :name, :type
+
+  def initialize(*args)
+    super *args
+    run_callbacks :initialize
+  end
 
   def show
     render layout: self.class.layout, view: "_#{type}"
