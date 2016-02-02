@@ -1,10 +1,10 @@
 class MetricsController < ApplicationController
   def index
-    @metrics = Settings.allowed_metrics
+    @metrics = Metric.to_render
   end
 
   def show
-    @metric = params[:id]
+    @metric = Metric.find_by :name, params[:id]
   end
 
   def options

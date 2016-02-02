@@ -21,10 +21,6 @@ class Metric::Cell < Cell::Concept
 
   private
 
-  def chart(options = {})
-    send type, options
-  end
-
   def data(options = {})
     data = model.data options
     data.kind_of?(Hash) && data.key?(:data) ? data[:data] : data
@@ -41,11 +37,6 @@ class Metric::Cell < Cell::Concept
   def aggregated_by_timeframe(options)
     url = url_for(action: :show, id: name, group_by: options[:group_by], only_path: true)
     area_chart url, id: chart_id
-  end
-
-  def onboarding_info(*)
-    new_data = data.keys.map { |key| { name: key, data: data[key] } }
-    line_chart new_data, height: '800px', min: -5, max: 100, id: chart_id
   end
 
   def invitation_funnel(subject)

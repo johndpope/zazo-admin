@@ -14,7 +14,7 @@ class Metric::Data::MessagesCountByPeriod < Metric::Data::Base
     end
   end
 
-  private
+  protected
 
   def results(events)
     sql = <<-SQL

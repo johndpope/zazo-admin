@@ -1,32 +1,46 @@
 require 'metric/data'
 
 class Metric
-  LIST = [
-    { name: :messages_failures, type: :messages_failures }
+  METRICS_PARAMS = [
+    { name: :onboarding_info },
+    { name: :messages_failures },
+    { name: :messages_failures_autonotification, type: :messages_failures }
+  ]
+
+  METRICS_TO_RENDER = [
+    :onboarding_info,
+    :messages_failures,
+    :messages_failures_autonotification
   ]
 
   class << self
     def all
-      LIST.map { |params| build_from_params params }
+      build_from_params METRICS_PARAMS
+    end
+
+    def to_render
+      METRICS_TO_RENDER.map do |name|
+        find_by :name, name
+      end.compact
     end
 
     def find_by(attribute, value)
-      params = LIST.find { |params| params[attribute] == value }
-      build_from_params params if params
+      metric_params = METRICS_PARAMS.find { |params| params[attribute] == value.to_sym }
+      build_from_params(metric_params).first if metric_params
     end
 
     private
 
-    def build_from_params(params)
-      new params
+    def build_from_params(metrics_params)
+      Array.wrap(metrics_params).map { |params| new params }
     end
   end
 
   attr_reader :name, :type, :data, :options
 
-  def initialize(name:, type:)
+  def initialize(name:, type: nil)
     @name = name
-    @type = type
+    @type = type || name
     @options = {}
   end
 

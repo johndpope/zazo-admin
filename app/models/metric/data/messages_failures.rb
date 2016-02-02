@@ -8,7 +8,7 @@ class Metric::Data::MessagesFailures < Metric::Data::Base
     { meta: meta, data: data }
   end
 
-  private
+  protected
 
   def sample
     { uploaded: 0,
@@ -46,30 +46,22 @@ class Metric::Data::MessagesFailures < Metric::Data::Base
   def data
     messages.each_with_object(aggregated_by_platforms) do |message, result|
       direction = :"#{message.sender_platform}_to_#{message.receiver_platform}"
-      data = result.fetch(direction, sample)
-      data[:uploaded] += 1
-      data[:delivered] += 1 if message.delivered?
-      data[:undelivered] += 1 if message.undelivered?
-      data[:incomplete] += 1 if message.status.uploaded?
-      if message.missing_events.include?(%w(video kvstore received))
-        data[:missing_kvstore_received] += 1
-      end
-      if message.missing_events.include?(%w(video notification received))
-        data[:missing_notification_received] += 1
-      end
-      if message.missing_events.include?(%w(video kvstore downloaded))
-        data[:missing_kvstore_downloaded] += 1
-      end
-      if message.missing_events.include?(%w(video notification downloaded))
-        data[:missing_notification_downloaded] += 1
-      end
-      if message.missing_events.include?(%w(video kvstore viewed))
-        data[:missing_kvstore_viewed] += 1
-      end
-      if message.missing_events.include?(%w(video notification viewed))
-        data[:missing_notification_viewed] += 1
-      end
-      result[direction] = data
+      result[direction] = handle_data_by_message result.fetch(direction, sample), message
     end
+  end
+
+  def handle_data_by_message(data, message)
+    missing_events = message.missing_events
+    data[:uploaded]    += 1
+    data[:delivered]   += 1 if message.delivered?
+    data[:undelivered] += 1 if message.undelivered?
+    data[:incomplete]  += 1 if message.status.uploaded?
+    data[:missing_kvstore_received]        += 1 if missing_events.include?(%w(video kvstore received))
+    data[:missing_notification_received]   += 1 if missing_events.include?(%w(video notification received))
+    data[:missing_kvstore_downloaded]      += 1 if missing_events.include?(%w(video kvstore downloaded))
+    data[:missing_notification_downloaded] += 1 if missing_events.include?(%w(video notification downloaded))
+    data[:missing_kvstore_viewed]          += 1 if missing_events.include?(%w(video kvstore viewed))
+    data[:missing_notification_viewed]     += 1 if missing_events.include?(%w(video notification viewed))
+    data
   end
 end
