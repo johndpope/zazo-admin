@@ -18,29 +18,28 @@
           th.text-center android / limited
           th.text-center android / not limited
       tbody
-        - metric.tap do |m|
-          tr
-            td.text
-              b RegisteredOrganicUsers
-            - m.for_each_platform do |key, platform|
-              td.text-center = m.registered key, platform
-          tr
-            td.text
-              b VerifiedOrganicUsers
-            - m.for_each_platform do |key, platform|
-              td.text-center = "#{m.verified key, platform} (#{m.percent_between({type: :verified, key: key, platform: platform}, {type: :registered, key: key, platform: platform})}%)"
-          tr
-            td.text
-              b UsersWhoInvitedOneOrMore
-            - m.for_each_platform do |key, platform|
-              td.text-center = "#{m.users_who_invites key, platform} (#{m.percent_between({type: :users_who_invites, key: key, platform: platform}, {type: :registered, key: key, platform: platform})}%)"
-          tr
-            td.text
-              b Invites
-            - m.for_each_platform do |key, platform|
-              td.text-center = m.invites key, platform
-          tr
-            td.text
-              b InvitesPerUserWhoInvitedOneOrMore
-            - m.for_each_platform do |key, platform|
-              td.text-center = m.invites_per_user_who_invites key, platform
+        tr
+          td.text
+            b RegisteredOrganicUsers
+          - for_each_platform do |key, platform|
+            td.text-center = registered key, platform
+        tr
+          td.text
+            b VerifiedOrganicUsers
+          - for_each_platform do |key, platform|
+            td.text-center = "#{verified key, platform} (#{percent_between({type: :verified, key: key, platform: platform}, {type: :registered, key: key, platform: platform})}%)"
+        tr
+          td.text
+            b UsersWhoInvitedOneOrMore
+          - for_each_platform do |key, platform|
+            td.text-center = "#{users_who_invites key, platform} (#{percent_between({type: :users_who_invites, key: key, platform: platform}, {type: :registered, key: key, platform: platform})}%)"
+        tr
+          td.text
+            b Invites
+          - for_each_platform do |key, platform|
+            td.text-center = invites key, platform
+        tr
+          td.text
+            b InvitesPerUserWhoInvitedOneOrMore
+          - for_each_platform do |key, platform|
+            td.text-center = invites_per_user_who_invites key, platform

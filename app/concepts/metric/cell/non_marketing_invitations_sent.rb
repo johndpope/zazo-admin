@@ -1,19 +1,7 @@
-class Metric::NonMarketingInvitationsSent
-  attr_reader :data, :options, :start_date, :end_date, :platforms
+class Metric::Cell::NonMarketingInvitationsSent < Metric::Cell
+  after_initialize :calculation
 
-  def initialize(data, opts)
-    @data    = data
-    @options = opts
-
-    @start_date = !options[:start_date] || options[:start_date].empty? ? 10.years.ago.to_time : Time.parse(options[:start_date])
-    @end_date   = !options[:end_date] || options[:end_date].empty? ? 10.years.from_now.to_time : Time.parse(options[:end_date])
-
-    @platforms = platforms_by_users
-    [:registered, :verified, :users_who_invites, :invites, :invites_per_user_who_invites].each do |var|
-      self.instance_variable_set :"@#{var}", initial_stats
-    end
-    calculate_results
-  end
+  attr_reader :start_date, :end_date
 
   def for_each_platform
     [:total, :ios, :android].each do |platform|
@@ -47,24 +35,33 @@ class Metric::NonMarketingInvitationsSent
     (@invites[key][platform].to_f / @users_who_invites[key][platform]).round 2
   end
 
-  private
+  #
+  # calculation
+  #
+
+  def calculation
+    set_options
+    set_variables
+    calculate_data
+  end
+
+  def set_options
+    @start_date = !options[:start_date] || options[:start_date].empty? ? 10.years.ago.to_time : Time.parse(options[:start_date])
+    @end_date   = !options[:end_date] || options[:end_date].empty? ? 10.years.from_now.to_time : Time.parse(options[:end_date])
+  end
+
+  def set_variables
+    [:registered, :verified, :users_who_invites, :invites, :invites_per_user_who_invites].each do |var|
+      self.instance_variable_set :"@#{var}", initial_stats
+    end
+  end
 
   def initial_stats
     { not_limited: { total: 0, android: 0, ios: 0 },
       limited:     { total: 0, android: 0, ios: 0 } }
   end
 
-  def platforms_by_users
-    User.where(mkey: data.map { |row| row['initiator'] }).each_with_object({}) do |user, memo|
-      memo[user.mkey] = user.device_platform.to_s
-    end
-  end
-
-  def platform_by_data_row(row)
-    platforms[row['initiator']]
-  end
-
-  def calculate_results
+  def calculate_data
     data.each do |row|
       calculate_users_by_state    row, :registered
       calculate_users_by_state    row, :verified
@@ -110,5 +107,17 @@ class Metric::NonMarketingInvitationsSent
       @invites[instance_key][:ios]     += invites_sent if platform == 'ios'
       @invites[instance_key][:android] += invites_sent if platform == 'android'
     end
+  end
+
+  def platforms
+    return @platforms if @platforms
+    users = User.where mkey: data.map { |row| row['initiator'] }
+    @platforms ||= users.each_with_object({}) do |user, memo|
+      memo[user.mkey] = user.device_platform.to_s
+    end
+  end
+
+  def platform_by_data_row(row)
+    platforms[row['initiator']]
   end
 end

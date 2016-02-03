@@ -18,12 +18,13 @@ class Metric::Cell < Cell::Concept
   property :name, :type
 
   def initialize(*args)
-    super *args
+    super
     run_callbacks :initialize
   end
 
   def show
-    render layout: self.class.layout, view: "_#{type}"
+    view = self.class.view rescue "_#{type}"
+    render layout: self.class.layout, view: view
   rescue Cell::TemplateMissingError
     render layout: self.class.layout, view: :show
   end
@@ -54,19 +55,6 @@ class Metric::Cell < Cell::Concept
 
   def non_marketing_users_data
     @metric ||= Metric::NonMarketingUsersData.new data(options), options
-  end
-
-  def invitation_conversion_data
-    @metric ||= Metric::InvitationConversionData.new data(options), options
-  end
-
-  def non_marketing_invitations_sent
-    @metric ||= Metric::NonMarketingInvitationsSent.new data(options), options
-  end
-
-  def upload_duplications_data
-    senders = options[:senders] && options[:senders].delete(' ').split(',')
-    @metric ||= Metric::UploadDuplicationsData.new data(senders: senders), options
   end
 
   def upload_duplications(*)

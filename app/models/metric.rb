@@ -7,6 +7,8 @@ class Metric
     { name: :usage_by_active_users, type: :aggregated_by_timeframe },
     { name: :upload_duplications_data },
     { name: :onboarding_info },
+    { name: :non_marketing_invitations_sent },
+    { name: :non_marketing_registered_by_weeks, type: :line_chart },
     { name: :invitation_conversion },
     { name: :messages_failures },
     { name: :messages_failures_autonotification, type: :messages_failures }
@@ -17,6 +19,8 @@ class Metric
     :messages_sent,
     :usage_by_active_users,
     :onboarding_info,
+    :non_marketing_registered_by_weeks,
+    :non_marketing_invitations_sent,
     :invitation_conversion,
     :messages_failures,
     :messages_failures_autonotification,
