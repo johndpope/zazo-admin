@@ -13,5 +13,5 @@
       .col-sm-5 = f.input :end_date,   as: :date_picker, label: false, placeholder: 'End date',   input_html: { value: options[:end_date] }
       .col-sm-2 = f.submit 'Apply', class: 'btn btn-default'
 
-.row == concept 'metric/invitation_funnel/cell', collection: chart
-.row == concept 'metric/growth_calculator/cell', chart(:raw)
+.row == concept 'metric/invitation_funnel/cell', collection: mapped_data
+.row == concept 'metric/growth_calculator/cell', raw_data

@@ -1,5 +1,6 @@
 class Metric::Data::Base
   extend ActiveModel::Callbacks
+  extend Metric::Data::Shared::Validators
 
   attr_reader :incoming_attributes
   define_model_callbacks :initialize
@@ -38,8 +39,14 @@ class Metric::Data::Base
   end
 
   def attribute_value(attr)
-    allowed_attributes[attr][:transform].kind_of?(Proc) ?
+    value = allowed_attributes[attr][:transform].kind_of?(Proc) ?
       allowed_attributes[attr][:transform].call(incoming_attributes[attr]) : incoming_attributes[attr]
+    valid?(attr, value) && allowed_attributes[attr][:default] ? value : allowed_attributes[attr][:default]
+  end
+
+  def valid?(attr, value)
+    allowed_attributes[attr][:validate].kind_of?(Proc) ?
+      allowed_attributes[attr][:validate].call(value) : true
   end
 
   def run_raw_query_on_events(query)
