@@ -10,13 +10,13 @@ RSpec.describe Metric::Data::NonMarketingRegisteredByWeeks, type: :model do
   describe '#generate' do
     subject { instance.generate }
     before do
-        invite_at user_1, (3.weeks - 5.day).ago
-        invite_at user_2, (3.weeks - 5.day).ago
-        invite_at user_3, (2.weeks - 5.day).ago
+      invite_at user_1, (3.weeks - 5.day).ago
+      invite_at user_2, (3.weeks - 5.day).ago
+      invite_at user_3, (2.weeks - 5.day).ago
 
-        register_at user_1, (3.weeks - 4.day).ago
-        register_at user_2, (2.weeks - 4.day).ago
-        register_at user_2, (1.weeks - 1.day).ago
+      register_at user_1, (3.weeks - 4.day).ago
+      register_at user_2, (2.weeks - 4.day).ago
+      register_at user_2, (1.weeks - 1.day).ago
     end
 
     # todo: fix this spec, it's not working on sunday :)
