@@ -6,6 +6,6 @@ ul.nav.nav-pills
   li role="presentation"
     a href="##{name}_by_month" aria-controls="#{name}_by_month" role="tab" data-toggle="pill" by month  
   .tab-content
-    .tab-pane.active id="#{name}_by_day" role="tabpanel" = chart group_by: :day
-    .tab-pane id="#{name}_by_week" role="tabpanel" = chart group_by: :week
-    .tab-pane id="#{name}_by_month" role="tabpanel" = chart group_by: :month
+    .tab-pane.active id="#{name}_by_day" role="tabpanel" = chart_by :day
+    .tab-pane id="#{name}_by_week" role="tabpanel" = chart_by :week
+    .tab-pane id="#{name}_by_month" role="tabpanel" = chart_by :month

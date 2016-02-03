@@ -1,10 +1,11 @@
 class MetricsController < ApplicationController
+  before_action :set_metric, only: [:show, :data]
+
   def index
     @metrics = Metric.to_render
   end
 
   def show
-    @metric = Metric.find_by :name, params[:id]
   end
 
   def options
@@ -13,6 +14,12 @@ class MetricsController < ApplicationController
   end
 
   def data
-    render json: Metric::Data.get_data(params[:id])
+    render json: @metric.data(params.except(:controller, :action, :id))
+  end
+
+  private
+
+  def set_metric
+    @metric = Metric.find_by_name params[:id]
   end
 end

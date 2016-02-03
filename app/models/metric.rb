@@ -2,6 +2,9 @@ require 'metric/data'
 
 class Metric
   METRICS_PARAMS = [
+    { name: :active_users, type: :aggregated_by_timeframe },
+    { name: :messages_sent, type: :aggregated_by_timeframe },
+    { name: :usage_by_active_users, type: :aggregated_by_timeframe },
     { name: :upload_duplications_data },
     { name: :onboarding_info },
     { name: :invitation_conversion },
@@ -10,6 +13,9 @@ class Metric
   ]
 
   METRICS_TO_RENDER = [
+    :active_users,
+    :messages_sent,
+    :usage_by_active_users,
     :onboarding_info,
     :invitation_conversion,
     :messages_failures,

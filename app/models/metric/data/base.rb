@@ -8,8 +8,8 @@ class Metric::Data::Base
     []
   end
 
-  def initialize(attributes = {})
-    @incoming_attributes = attributes
+  def initialize(incoming_attributes = {})
+    @incoming_attributes = incoming_attributes
     set_attributes
     run_callbacks :initialize
   end

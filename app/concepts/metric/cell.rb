@@ -43,11 +43,6 @@ class Metric::Cell < Cell::Concept
   # metrics
   #
 
-  def aggregated_by_timeframe(options)
-    url = url_for(action: :show, id: name, group_by: options[:group_by], only_path: true)
-    area_chart url, id: chart_id
-  end
-
   def invitation_funnel(subject)
     @data ||= data options
     return @data if subject == :raw
