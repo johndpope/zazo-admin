@@ -1,5 +1,5 @@
 module Metric::Data::Shared::Validators
-  def validate_date_string
+  def string_contains_date?
     -> (value) do
       begin
         Time.parse value
