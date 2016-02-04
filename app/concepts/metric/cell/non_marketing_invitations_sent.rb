@@ -62,7 +62,7 @@ class Metric::Cell::NonMarketingInvitationsSent < Metric::Cell
   end
 
   def calculate_data
-    data.each do |row|
+    data(options).each do |row|
       calculate_users_by_state    row, :registered
       calculate_users_by_state    row, :verified
       calculate_users_and_invites row, 'invites_sent', :not_limited

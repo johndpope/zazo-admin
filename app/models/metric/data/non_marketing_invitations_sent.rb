@@ -1,7 +1,7 @@
 class Metric::Data::NonMarketingInvitationsSent < Metric::Data::Base
   def self.allowed_attributes
-    { start_date: { default: 10.years.ago.to_time },
-      end_date:   { default: 10.years.from_now.to_time } }
+    { start_date: { default: 10.years.ago.to_time,      validate: { before: string_contains_date? }, transform: string_to_time },
+      end_date:   { default: 10.years.from_now.to_time, validate: { before: string_contains_date? }, transform: string_to_time } }
   end
 
   def generate
