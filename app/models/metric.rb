@@ -2,6 +2,8 @@ require 'metric/data'
 
 class Metric
   METRICS_PARAMS = [
+    { name: :users_device_platform, type: :pie_chart },
+    { name: :users_status, type: :pie_chart },
     { name: :active_users, type: :aggregated_by_timeframe },
     { name: :messages_sent, type: :aggregated_by_timeframe },
     { name: :usage_by_active_users, type: :aggregated_by_timeframe },

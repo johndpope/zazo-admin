@@ -1,6 +1,4 @@
 h1 Dashboard
 
-section
-  .col-md-12
-    == render 'metric_panel', metric: :users_device_platform, chart: :pie_chart
-    == render 'metric_panel', metric: :users_status, chart: :pie_chart
+== concept 'metric/cell/pie_chart', Metric.find_by_name(:users_device_platform)
+== concept 'metric/cell/pie_chart', Metric.find_by_name(:users_status)
