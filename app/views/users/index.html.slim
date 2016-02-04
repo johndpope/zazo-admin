@@ -45,6 +45,8 @@ section
               td
                 = link_to 'Show', user
                 = actions_separator
+                = link_to 'Connections', connections_user_path(user)
+                = actions_separator
                 = link_to 'Events', events_user_path(user)
                 = actions_separator
                 = link_to 'Visualize', visualization_user_path(user)

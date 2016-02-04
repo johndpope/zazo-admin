@@ -44,11 +44,14 @@ class Metric::Data::Base
       return allowed_attributes[attr][:default]
     end
     value = transform(attr)
-    valid?(attr, value, :after) && allowed_attributes[attr][:default] ? value : allowed_attributes[attr][:default]
+    if !valid?(attr, value, :after) && allowed_attributes[attr][:default]
+      return allowed_attributes[attr][:default]
+    end
+    value
   end
 
   def valid?(attr, value, type)
-    allowed_attributes[attr][:validate][type].kind_of?(Proc) ?
+    allowed_attributes[attr][:validate].try(:[], type).kind_of?(Proc) ?
       allowed_attributes[attr][:validate][type].call(value) : true
   end
 

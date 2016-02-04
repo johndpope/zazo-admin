@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :visualization, :events, :request_logs]
+  before_action :set_user, only: [:show, :connections, :events, :visualization, :request_logs]
   decorates_assigned :user
 
   def index
@@ -16,8 +16,11 @@ class UsersController < ApplicationController
   end
 
   def show
+  end
+
+  def connections
     @message_statuses = @user.connected_users.count > 1 ?
-      Metric::Data.get_data(:messages_statuses_between_users, {
+      Metric.find_by_name(:messages_statuses_between_users).data({
         user_id: @user.mkey,
         friend_ids: @user.connected_users.pluck(:mkey)
       }) : {}

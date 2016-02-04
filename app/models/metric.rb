@@ -14,7 +14,8 @@ class Metric
     { name: :non_marketing_registered_by_weeks, type: :line_chart },
     { name: :invitation_conversion },
     { name: :messages_failures },
-    { name: :messages_failures_autonotification, type: :messages_failures }
+    { name: :messages_failures_autonotification, type: :messages_failures },
+    { name: :messages_statuses_between_users }
   ]
 
   METRICS_TO_RENDER = [

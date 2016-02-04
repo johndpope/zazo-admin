@@ -1,3 +1,18 @@
+h1 = user.name
+
+.row
+  .col-sm-4
+    table.table
+      tr
+        td # Connections
+        td = user.connections.count
+      tr
+        td # Live connections
+        td = user.live_connections.count
+      tr
+        td # Active connections
+        td = user.active_connections.count
+
 h4
   ' Connections
   span.badge = user.connections_counts
@@ -31,3 +46,5 @@ table.table
       - if @message_statuses
         == render 'message_status_cells', data: @message_statuses[:total], user_id: user.mkey, outgoing_options: {}, incoming_options: {}
     td
+
+= link_to 'Back', user_path(@user), class: 'btn btn-default'

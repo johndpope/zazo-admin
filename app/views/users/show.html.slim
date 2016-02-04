@@ -1,2 +1,43 @@
-== render user
-== render 'connections', user: user
+h1 = user.name
+
+table.table
+  tr
+    td Id
+    td = user.id
+  tr
+    td First name
+    td = user.first_name
+  tr
+    td Last name
+    td = user.last_name
+  tr
+    td Mobile number
+    td = user.mobile_number
+  tr
+    td Device platform
+    td = human_device_platform user.device_platform
+  tr
+    td Auth
+    td
+      code = user.auth
+  tr
+    td Mkey
+    td
+      code = user.mkey
+  tr
+    td Status
+    td = status_tag user.status
+  tr
+    td Verification code
+    td = user.verification_code
+  tr
+    td Verification sent at
+    td = user.verification_date_time
+
+= link_to 'Connections', connections_user_path(user), class: 'btn btn-default'
+' &nbsp;
+= link_to 'Events', events_user_path(user), class: 'btn btn-default'
+' &nbsp;
+= link_to 'Visualize', visualization_user_path(user), class: 'btn btn-default'
+' &nbsp;
+= link_to 'Request logs', request_logs_user_path(user), class: 'btn btn-default'
