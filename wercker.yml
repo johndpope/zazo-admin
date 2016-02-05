@@ -17,8 +17,8 @@ build:
         MYSQL_ROOT_PASSWORD: secret888zazo
   steps:
     - script:
-        name: update rubygems and install libraries
-        code: gem update --system && apt-get -y -q install libxslt1-dev
+        name: update rubygems
+        code: gem update --system '2.4.8'
     - asux/bundle-install@1.1.8:
         gemfile: config/Gemfile
         path: /usr/local/bundle
