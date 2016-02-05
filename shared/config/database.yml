@@ -13,7 +13,7 @@ defaults: &events_db_defaults
   adapter: postgresql
   encoding: utf8
   host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] || Figaro.env.events_db_host %>
-  database: <%= ENV['POSTGRES_ENV_POSTGRES_DATABASE'] || Figaro.env.events_db_name %>
+  database: <%= ENV['POSTGRES_ENV_POSTGRES_DB'] || Figaro.env.events_db_name %>
   username: <%= ENV['POSTGRES_ENV_POSTGRES_USER'] || Figaro.env.events_db_username %>
   password: <%= ENV['POSTGRES_ENV_POSTGRES_PASSWORD'] || Figaro.env.events_db_password %>
   port: <%= ENV['POSTGRES_PORT_5432_TCP_PORT'] || Figaro.env.events_db_port || '5432' %>

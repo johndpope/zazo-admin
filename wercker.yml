@@ -17,6 +17,9 @@ build:
         MYSQL_ROOT_PASSWORD: secret888zazo
   steps:
     - script:
+        name: show environment variables
+        code: env
+    - script:
         name: update rubygems
         code: gem update --system '2.4.8'
     - asux/bundle-install@1.1.8:
