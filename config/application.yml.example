@@ -3,6 +3,8 @@ http_basic_password:
 
 host_name: staging.zazoapp.com
 
+rollbar_access_token:
+
 notification_api_base_url:
 notification_api_token:
 
