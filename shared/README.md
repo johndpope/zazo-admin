@@ -58,6 +58,7 @@ gem 'figaro', github: 'asux/figaro', branch: 'feature/eb-set-command'
 gem 'aasm'
 gem 'phonelib'
 gem 'global_phone'
+gem 'enum_handler', github: 'asux/enum_handler'
 
 group :development do
   gem 'better_errors'

@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/asux/enum_handler.git
+  revision: 676228d228851c9f6873f7b0fb220fab7426ef4f
+  specs:
+    enum_handler (0.3)
+      rails (> 3.2.0)
+
+GIT
   remote: git://github.com/asux/figaro.git
   revision: 0dd352cde48d101c43bfdc00031433eed4e79415
   branch: feature/eb-set-command
@@ -338,6 +345,7 @@ DEPENDENCIES
   database_cleaner
   datetimepicker-rails!
   draper
+  enum_handler!
   factory_girl_rails
   faker
   faraday-digestauth
