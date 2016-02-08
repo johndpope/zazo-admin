@@ -77,3 +77,6 @@ gem 'puma'
 gem 'newrelic_rpm'
 gem 'remote_syslog_logger'
 gem 'foreman'
+
+gem 'faraday_middleware'
+gem 'faraday-digestauth'
