@@ -24,4 +24,6 @@ Rails.application.routes.draw do
 
   get 'kvstore_admin' => 'kvstore_admin#index'
   get 'kvstore_admin/delete_all' => 'kvstore_admin#delete_all'
+
+  get 'status', to: Proc.new { [200, {}, ['']] }
 end
