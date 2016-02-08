@@ -1,4 +1,5 @@
 class User < BaseConnection::UsersDb
+  include EnumHandler
   include AASM
   include UserInfoHelpers
   include UserConnectionHelpers
@@ -19,6 +20,8 @@ class User < BaseConnection::UsersDb
   def event_as_receiver
     Event.with_receiver(mkey)
   end
+
+  define_enum :device_platform, [:ios, :android]
 
   aasm column: :status do
     state :initialized, initial: true
