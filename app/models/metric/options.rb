@@ -25,7 +25,7 @@ class Metric::Options
   attr_reader :metric
 
   def self.get_by_session(session)
-    OptionsWrapper[session[SESSION_KEY]]
+    OptionsWrapper[session[SESSION_KEY] || {}]
   end
 
   def initialize(metric)
