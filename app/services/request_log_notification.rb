@@ -41,7 +41,7 @@ class RequestLogNotification
   end
 
   def payload_host
-    "#{(Rails.env.production? ? 'prod' : 'staging')}.zazoapp.com"
+    Figaro.env.host_name
   end
 
   #
