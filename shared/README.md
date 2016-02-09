@@ -25,6 +25,11 @@ config.autoload_paths += %W(#{config.root}/shared/app/models)
 self.paths['config/database'] = 'shared/config/database.yml'
 ```
 
+Create *config/initializers/shared.rb* file with content below:
+```
+Dir[Rails.root.join('shared/config/initializers/**/*.rb')].each { |f| require f }
+```
+
 Set up ENV-variables in *config/application.yml*
 ```
 users_db_host:
