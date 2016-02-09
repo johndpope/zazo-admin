@@ -18,8 +18,6 @@ class Event < BaseConnection::EventsDb
   scope :video_s3_uploaded,    -> { by_name %w(video s3 uploaded) }
   scope :s3_events,            -> { name_overlap %w(uploaded sent) }
 
-  paginates_per 100
-
   def self.filter_by(term)
     term = Array(term)
     term_pattern = "%(#{term.join('|')})%"
