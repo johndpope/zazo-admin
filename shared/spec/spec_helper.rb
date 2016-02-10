@@ -40,3 +40,6 @@ end
 
 Dir[Rails.root.join('shared/spec/support/**/*.rb')].each { |f| require f }
 Dir[Rails.root.join('spec/support/**/*.rb')].each        { |f| require f }
+
+FactoryGirl.definition_file_paths = %w(shared/spec/factories)
+FactoryGirl.find_definitions
