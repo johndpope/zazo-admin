@@ -6,4 +6,5 @@ end
 
 RSpec.configure do |config|
   config.include JsonResponseHelper, type: :controller
+  config.include JsonResponseHelper, type: :request
 end
