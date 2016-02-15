@@ -1,5 +1,5 @@
 defaults: &settings
-  version: 1.0.0
+  version: 1.0.1
   app_name: Zazo Admin
   app_name_key: admin
   default_per_page: 100
