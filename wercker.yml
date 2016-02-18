@@ -37,11 +37,11 @@ build:
         code: rspec
   after-steps:
     - asux/pretty-slack-notify:
-        webhook_url: $slack_url
+        webhook_url: $SLACK_URL
         channel: devops
 
 deploy:
-  box: vano468/awseb-wercker-deploy
+  box: zazo/awseb-wercker-deploy
   steps:
     - script:
         name: set up ssh key
@@ -58,3 +58,8 @@ deploy:
     - script:
         name: deploy to eb
         code: /opt/action/eb_deploy.sh
+  after-steps:
+    - slack-notifier:
+        url: $SLACK_URL
+        channel: devops
+        username: Wercker

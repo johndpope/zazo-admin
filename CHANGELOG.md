@@ -1,7 +1,7 @@
 # Changelog
 
 ### v1.0.2
-- :bulb: Update Dockerfile to use cached rubygems
+- :bulb: Updated Dockerfile to use cached rubygems
 - :hammer: Fixed wercker deploy config
 
 ### v1.0.1
