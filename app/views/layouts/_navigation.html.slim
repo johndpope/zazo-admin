@@ -1,4 +1,3 @@
-/ navigation styled for Bootstrap 3.0
 nav.navbar.navbar-inverse.navbar-fixed-top
   .container
     .navbar-header
@@ -13,3 +12,4 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         == render 'layouts/navigation_links'
       ul.nav.navbar-nav.navbar-right
         li.version-info = Settings.version
+        li.app-environment = Rails.env
