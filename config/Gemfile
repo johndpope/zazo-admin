@@ -76,7 +76,6 @@ gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: '
 
 gem 'puma'
 gem 'newrelic_rpm'
-gem 'remote_syslog_logger'
 gem 'foreman'
 
 gem 'faraday_middleware'

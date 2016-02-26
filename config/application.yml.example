@@ -4,6 +4,7 @@ http_basic_password:
 host_name: staging.zazoapp.com
 
 rollbar_access_token:
+newrelic_license_key:
 
 notification_api_base_url:
 notification_api_token:
