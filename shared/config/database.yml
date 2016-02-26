@@ -26,6 +26,9 @@ development:
 test:
   <<: *users_db_defaults
 
+staging:
+  <<: *users_db_defaults
+
 production:
   <<: *users_db_defaults
 
@@ -34,6 +37,9 @@ events_db_development:
   <<: *events_db_defaults
 
 events_db_test:
+  <<: *events_db_defaults
+
+events_db_staging:
   <<: *events_db_defaults
 
 events_db_production:
