@@ -1,5 +1,9 @@
 # Changelog
 
+### v1.0.4
+- :arrow_up: Updated shared subtree
+- :bulb: Added newrelic config
+
 ### v1.0.3
 - :bulb: Added after build slack notifier
 - :hammer: Changed box owner for wercker deployment
