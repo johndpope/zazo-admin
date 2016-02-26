@@ -1,5 +1,9 @@
 # Changelog
 
+### v1.0.5
+- :arrow_up: Updated shared subtree (staging settings for database config)
+- :bulb: Added staging env config
+
 ### v1.0.4
 - :arrow_up: Updated shared subtree
 - :bulb: Added newrelic config
