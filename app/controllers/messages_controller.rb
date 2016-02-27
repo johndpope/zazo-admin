@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
     @sender   = User.find_by_mkey(messages_params[:sender_id])
     @receiver = User.find_by_mkey(messages_params[:receiver_id])
     @filter = params[:filter]
-    @messages.select!(&:"#{@filter}?") if @filter && Message.new.respond_to?(:"#{@filter}?")
+    @messages.select!(&:"#{@filter}?") if @filter && @messages.first.respond_to?(:"#{@filter}?")
     @messages = MessageDecorator.decorate_collection(@messages)
   end
 
