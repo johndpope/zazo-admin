@@ -25,7 +25,7 @@ class Message
     events = events.since(options.fetch(:start_date).to_date) if options.key?(:start_date)
     events = events.till(options.fetch(:end_date).to_date + 1) if options.key?(:end_date)
     events = events.page(options.fetch(:page, 1)) if options.key?(:page)
-    events = events.per(options.fetch(:per, 100)) if options.key?(:per)
+    events = events.page(1).per(options.fetch(:per, 100)) if options.key?(:per)
     order = options.fetch(:reverse, false) ? 'DESC' : 'ASC'
     events.order("triggered_at #{order}")
   end
