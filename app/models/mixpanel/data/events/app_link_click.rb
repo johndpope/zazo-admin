@@ -1,4 +1,4 @@
-class Mixpanel::Data::Events::AppLinkClicks < Mixpanel::Data::Events::Base
+class Mixpanel::Data::Events::AppLinkClick < Mixpanel::Data::Events::Base
   def self.description
     {
       name: :app_link_click,
