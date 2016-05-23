@@ -38,9 +38,11 @@ class Event < BaseConnection::EventsDb
   end
 
   # new
-  scope :by_initiator_id,      -> (initiator_id) { where initiator_id: initiator_id }
-  scope :status_transitions,   -> { name_overlap %w(invited initialized registered verified) }
-  scope :invites,              -> { by_name %w(user invitation_sent) }
+  scope :by_initiator_id,        -> (initiator_id) { where initiator_id: initiator_id }
+  scope :status_transitions,     -> { name_overlap %w(invited initialized registered verified) }
+  scope :invites,                -> { by_name %w(user invitation_sent) }
+  scope :app_link_clicks,        -> { by_name %w(user app_link_clicked) }
+  scope :direct_invite_messages, -> { by_name %w(user invitation direct_invite_message) }
 
   def self.distinct_target_id
     unique_events = <<-SQL

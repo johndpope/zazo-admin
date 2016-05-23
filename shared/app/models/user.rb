@@ -6,6 +6,8 @@ class User < BaseConnection::UsersDb
   include UserEventHelpers
   extend  UserScopeMethods
 
+  serialize :emails, Array
+
   has_many :connections_as_creator, class_name: 'Connection', foreign_key: :creator_id
   has_many :connections_as_target,  class_name: 'Connection', foreign_key: :target_id
   has_one  :push_user, primary_key: :mkey, foreign_key: :mkey
