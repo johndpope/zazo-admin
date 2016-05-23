@@ -1,6 +1,6 @@
 # Changelog
 
-### next release
+### v1.0.7
 - :bulb: Added PushUser information to user page
 - :arrow_up: Updated latest shared stuff
 - :hammer: Fixed Dockerfile and Wercker configuration
