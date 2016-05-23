@@ -1,5 +1,4 @@
 box: zazo/rails
-
 build:
   services:
     - id: postgres
@@ -16,12 +15,6 @@ build:
         MYSQL_DATABASE: users_db
         MYSQL_ROOT_PASSWORD: secret888zazo
   steps:
-    - script:
-        name: show environment variables
-        code: env
-    - script:
-        name: update rubygems
-        code: gem update --system '2.4.8'
     - asux/bundle-install@1.1.8:
         gemfile: config/Gemfile
         path: /usr/local/bundle
@@ -39,7 +32,6 @@ build:
     - asux/pretty-slack-notify:
         webhook_url: $SLACK_URL
         channel: devops
-
 deploy:
   box: zazo/awseb-wercker-deploy
   steps:
