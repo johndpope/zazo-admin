@@ -63,6 +63,18 @@ class UserDecorator < Draper::Decorator
     grouped_connections.size
   end
 
+  #
+  # push user information
+  #
+
+  def device_build
+    push_user.try(:device_build)
+  end
+
+  def push_token
+    push_user.try(:push_token)
+  end
+
   private
 
   def sort_connections(conns)

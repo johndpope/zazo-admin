@@ -1,6 +1,7 @@
 # Changelog
 
 ### v1.0.8
+- :hammer: Fixed user#show page
 
 ### v1.0.7
 - :bulb: Added PushUser information to user page
