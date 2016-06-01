@@ -14,9 +14,6 @@ table.table
     td Mobile number
     td = user.mobile_number
   tr
-    td Device platform
-    td = human_device_platform user.device_platform
-  tr
     td Auth
     td
       code = user.auth
@@ -25,21 +22,21 @@ table.table
     td
       code = user.mkey
   tr
-    td Push token
-    td
-      code = user.push_user.push_token
-  tr
     td Device platform
     td
-      code = user.push_user.device_platform
-  - if user.push_user.device_platform == :ios
+      code = user.device_platform
+  - if user.device_platform == :ios
     tr
       td Device build
       td
-        code = user.push_user.device_build
+        code = user.device_build
+  tr
+    td Push token
+    td
+      code = user.push_token
   tr
     td Status
-    td = status_tag user.status
+    td = status_tag(user.status)
   tr
     td Verification code
     td = user.verification_code
